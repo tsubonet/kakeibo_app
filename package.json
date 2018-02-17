@@ -1,6 +1,9 @@
 {
   "name": "kakeibo",
   "private": true,
+  "scripts": {
+    "start:dev": "webpack-dev-server"
+  },
   "dependencies": {
     "@rails/webpacker": "^3.2.2",
     "babel-preset-react": "^6.24.1",

@@ -5,9 +5,6 @@ function* handleFetchPootProps(action) {
   try {
     loadingStart()
     const { actionPath, date, records, record } = yield call(getRecord, action.payload.url)
-    if (action.payload.pushState) {
-      history.pushState(null, '', action.payload.url)
-    }
     yield put({ type: 'GET_ACTION_PATH', actionPath: actionPath })
     yield put({ type: 'GET_DATE', date: date })
     if (typeof records !== 'undefined') {
@@ -15,6 +12,9 @@ function* handleFetchPootProps(action) {
     }
     if (typeof record !== 'undefined') {
       yield put({ type: 'GET_RECORD', record: record })
+    }
+    if (action.payload.pushState) {
+      action.payload.callback()
     }
     loadingEnd()
     window.scrollTo(0, 0)

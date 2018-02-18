@@ -1,5 +1,5 @@
 import 'babel-polyfill'
-import React from 'react'
+import * as React from 'react'
 import { Provider } from 'react-redux'
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
 import ReactOnRails from 'react-on-rails'

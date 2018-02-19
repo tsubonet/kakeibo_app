@@ -1,9 +1,9 @@
-import React from 'react'
+import * as React from 'react'
 import Link from '../components/link'
 import Calendar from '../components/calendar'
 import Charts from '../components/charts'
 
-export default class PageMonth extends React.Component {
+export default class PageMonth extends React.Component<any, any> {
   constructor(props) {
     super(props)
     this.state = props

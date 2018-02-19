@@ -1,7 +1,7 @@
-import React from 'react'
+import * as React from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell, Legend, Tooltip } from 'recharts'
 
-export default class Charts extends React.Component {
+export default class Charts extends React.Component<any, any> {
   constructor(props) {
     super(props)
     this.state = props

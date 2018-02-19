@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import * as React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Link from '../components/link'
 
@@ -7,13 +7,14 @@ import PageYearContainer from '../containers/page_year_container'
 import PageMonthContainer from '../containers/page_month_container'
 import PageDayContainer from '../containers/page_day_container'
 
-export default class Router extends React.Component {
+export default class Router extends React.Component<any, any> {
   static childContextTypes = {
     onLinkClick: PropTypes.func,
   }
 
-  constructor(...args) {
-    super(...args)
+  constructor(props) {
+    //super(...args)
+    super(props)
     this.state = {
       rootProps: this.props,
     }

@@ -1,9 +1,9 @@
-import React from 'react'
+import * as React from 'react'
 import { getHoliday } from '../utils'
 import Link from '../components/link'
 import Calendar from '../components/calendar'
 
-export default class PageYear extends React.Component {
+export default class PageYear extends React.Component<any, any> {
   constructor(props) {
     super(props)
     this.state = props
@@ -14,10 +14,12 @@ export default class PageYear extends React.Component {
   }
 
   render() {
+    // typescriptが通らないので一時的に
+    // [...Array(12).keys()]をArray.from(Array(12), (v, k) => k)に修正
     return (
       <div>
         {(() => {
-          return [...Array(12).keys()].map((row, i) => {
+          return Array.from(Array(12), (v, k) => k).map((row, i) => {
             let date = Object.assign({}, this.state.date)
             date.month = row + 1
             return <Calendar key={i} date={date} records={this.state.records} />

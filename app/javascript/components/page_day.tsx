@@ -1,8 +1,8 @@
-import React from 'react'
+import * as React from 'react'
 import Link from '../components/link'
 import { sendPost, sendPatch } from '../utils'
 
-export default class PageDay extends React.Component {
+export default class PageDay extends React.Component<any, any> {
   constructor(props) {
     super(props)
     this.state = {

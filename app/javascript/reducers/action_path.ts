@@ -1,4 +1,4 @@
-export default function reducer(state = '', action) {
+export default function reducer(state: string = '', action): string {
   switch (action.type) {
     case 'GET_ACTION_PATH':
       return action.actionPath

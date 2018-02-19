@@ -8,10 +8,6 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {}
-}
-
-const PageYearContainer = connect(mapStateToProps, mapDispatchToProps)(PageYear)
+const PageYearContainer = connect(mapStateToProps)(PageYear)
 
 export default PageYearContainer

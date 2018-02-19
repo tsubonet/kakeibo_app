@@ -8,10 +8,6 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {}
-}
-
-const PageMonthContainer = connect(mapStateToProps, mapDispatchToProps)(PageMonth)
+const PageMonthContainer = connect(mapStateToProps)(PageMonth)
 
 export default PageMonthContainer

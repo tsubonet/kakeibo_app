@@ -1,8 +1,17 @@
 import * as React from 'react'
 import Link from '../components/link'
 import { getHoliday } from '../utils'
+import { Date, Record } from '../types/index'
 
-export default class Calendar extends React.Component<any, any> {
+interface Props {
+  date: Date
+  records: Record[]
+}
+interface State {
+  date: Date
+  records: Record[]
+}
+export default class Calendar extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = props

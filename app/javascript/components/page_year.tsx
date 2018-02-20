@@ -2,14 +2,23 @@ import * as React from 'react'
 import { getHoliday } from '../utils'
 import Link from '../components/link'
 import Calendar from '../components/calendar'
+import { Date, Record } from '../types/index'
 
-export default class PageYear extends React.Component<any, any> {
-  constructor(props) {
+interface Props {
+  date: Date
+  records: Record[]
+}
+interface State {
+  date: Date
+  records: Record[]
+}
+export default class PageYear extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props)
     this.state = props
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     this.setState(nextProps)
   }
 

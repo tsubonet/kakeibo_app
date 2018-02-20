@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types'
 import * as React from 'react'
+import PropTypes from 'prop-types'
 
-export default class Link extends React.Component<any, any> {
+export default class Link extends React.Component<any> {
   static contextTypes = {
     onLinkClick: PropTypes.func,
   }

@@ -1,8 +1,22 @@
 import * as React from 'react'
 import Link from '../components/link'
 import { sendPost, sendPatch } from '../utils'
+import { Date, Record } from '../types/index'
 
-export default class PageDay extends React.Component<any, any> {
+interface Props {
+  date: Date
+  record: Record
+  patchRecord(record: Record, result: string): void
+  postRecord(date: Date, result: string): void
+  deleteRecord(record: Record): void
+}
+interface State {
+  date: Date
+  record: Record
+  isEdit: boolean
+}
+
+export default class PageDay extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {

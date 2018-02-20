@@ -2,18 +2,27 @@ import * as React from 'react'
 import Link from '../components/link'
 import Calendar from '../components/calendar'
 import Charts from '../components/charts'
+import { Date, Record } from '../types/index'
 
-export default class PageMonth extends React.Component<any, any> {
-  constructor(props) {
+interface Props {
+  date: Date
+  records: Record[]
+}
+interface State {
+  date: Date
+  records: Record[]
+}
+export default class PageMonth extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props)
     this.state = props
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     this.setState(nextProps)
   }
 
-  prevCalendar() {
+  prevCalendar(): string {
     if (this.state.date.month === 1) {
       return `/month/${this.state.date.year - 1}/12`
     } else {
@@ -21,7 +30,7 @@ export default class PageMonth extends React.Component<any, any> {
     }
   }
 
-  nextCalendar() {
+  nextCalendar(): string {
     if (this.state.date.month === 12) {
       return `/month/${this.state.date.year + 1}/1`
     } else {

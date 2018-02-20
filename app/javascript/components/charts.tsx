@@ -1,8 +1,15 @@
 import * as React from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell, Legend, Tooltip } from 'recharts'
+import { Date, Record } from '../types/index'
 
-export default class Charts extends React.Component<any, any> {
-  constructor(props) {
+interface Props {
+  records: Record[]
+}
+interface State {
+  records: Record[]
+}
+export default class Charts extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props)
     this.state = props
   }

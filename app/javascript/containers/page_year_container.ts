@@ -1,10 +1,11 @@
 import { connect } from 'react-redux'
 import PageYear from '../components/page_year'
+import { StoreState } from '../types/index'
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ date, records }: StoreState) => {
   return {
-    date: state.date,
-    records: state.records,
+    date,
+    records,
   }
 }
 

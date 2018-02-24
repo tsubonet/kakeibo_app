@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Link from '../components/link'
+import Budget from '../components/budget'
 import { getHoliday } from '../utils'
 import { Date, Record } from '../types/index'
 
@@ -79,6 +80,7 @@ export default class Calendar extends React.Component<Props, State> {
         <div data-role="caption">
           {this.state.date.year}年<span>{this.state.date.month}</span>月
         </div>
+
         <table>
           <thead>
             <tr>

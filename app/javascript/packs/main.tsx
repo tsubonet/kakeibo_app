@@ -12,6 +12,8 @@ import actionPath from '../reducers/action_path'
 import date from '../reducers/date'
 import records from '../reducers/records'
 import record from '../reducers/record'
+import budgets from '../reducers/budgets'
+import budget from '../reducers/budget'
 
 import logger from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
@@ -24,10 +26,12 @@ const App = (props, railsContext) => {
   const sagaMiddleware = createSagaMiddleware()
   const store = createStore(
     combineReducers({
-      actionPath: actionPath,
-      date: date,
-      records: records,
-      record: record,
+      actionPath,
+      date,
+      records,
+      record,
+      budgets,
+      budget,
       router: routerReducer,
     }),
     props,

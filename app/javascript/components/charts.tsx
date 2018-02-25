@@ -5,26 +5,19 @@ import { Date, Record } from '../types/index'
 interface Props {
   records: Record[]
 }
-interface State {
-  records: Record[]
-}
-export default class Charts extends React.Component<Props, State> {
+export default class Charts extends React.Component<Props> {
   constructor(props: Props) {
     super(props)
-    this.state = props
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState(nextProps)
   }
 
   render() {
+    const { records } = this.props
     let limitedCount = 0,
       goodCount = 0,
       wakeupCount = 0,
       badCount = 0,
       sickCount = 0
-    this.state.records.forEach(record => {
+    records.forEach(record => {
       switch (record.sort) {
         case 'limited':
           limitedCount++
@@ -63,7 +56,7 @@ export default class Charts extends React.Component<Props, State> {
     return (
       <div>
         {(() => {
-          if (this.state.records.length) {
+          if (records.length) {
             return (
               <div style={containerStyle}>
                 <ResponsiveContainer>

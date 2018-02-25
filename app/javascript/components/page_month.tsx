@@ -8,37 +8,31 @@ interface Props {
   date: Date
   records: Record[]
 }
-interface State {
-  date: Date
-  records: Record[]
-}
-export default class PageMonth extends React.Component<Props, State> {
+export default class PageMonth extends React.Component<Props> {
   constructor(props: Props) {
     super(props)
-    this.state = props
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    this.setState(nextProps)
   }
 
   prevCalendar(): string {
-    if (this.state.date.month === 1) {
-      return `/month/${this.state.date.year - 1}/12`
+    const { date } = this.props
+    if (date.month === 1) {
+      return `/month/${date.year - 1}/12`
     } else {
-      return `/month/${this.state.date.year}/${this.state.date.month - 1}`
+      return `/month/${date.year}/${date.month - 1}`
     }
   }
 
   nextCalendar(): string {
-    if (this.state.date.month === 12) {
-      return `/month/${this.state.date.year + 1}/1`
+    const { date } = this.props
+    if (date.month === 12) {
+      return `/month/${date.year + 1}/1`
     } else {
-      return `/month/${this.state.date.year}/${this.state.date.month + 1}`
+      return `/month/${date.year}/${date.month + 1}`
     }
   }
 
   render() {
+    const { date } = this.props
     return (
       <div>
         <nav>
@@ -57,12 +51,12 @@ export default class PageMonth extends React.Component<Props, State> {
               <Link href="/">今月</Link>
             </li>
             <li>
-              <Link href={`/year/${this.state.date.year}`}>{this.state.date.year}年一覧</Link>
+              <Link href={`/year/${date.year}`}>{date.year}年一覧</Link>
             </li>
           </ul>
         </nav>
-        <Calendar {...this.state} />
-        <Charts {...this.state} />
+        <Calendar {...this.props} />
+        <Charts {...this.props} />
       </div>
     )
   }

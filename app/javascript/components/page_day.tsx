@@ -65,11 +65,16 @@ export default class PageDay extends React.Component<Props, State> {
           <dd>
             {(() => {
               if (records.length) {
-                return records.reduce((previous, current) => {
-                  return previous + current.price
-                }, 0)
-              } else {
-                return <div>まだ記入がありません</div>
+                return (
+                  <div>
+                    {(() => {
+                      return records.reduce((previous, current) => {
+                        return previous + current.price
+                      }, 0)
+                    })()}
+                    円
+                  </div>
+                )
               }
             })()}
           </dd>

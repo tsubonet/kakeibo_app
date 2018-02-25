@@ -4,7 +4,7 @@ export default function reducer(state = [], action) {
       return action.records
     case 'POST_RECORD':
       return [...state, action.record]
-    case 'DELETE_RECORDS':
+    case 'DELETE_RECORD':
       return null
     default:
       return state

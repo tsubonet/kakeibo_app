@@ -11,21 +11,35 @@ export default class BudgetItem extends React.Component<any, any> {
 
   handleEdit(e) {
     e.preventDefault()
-    let data = {}
-    this.props.onEdit(this.props.device, data)
-    this.setState({ isEdit: false })
+    this.setState({ isEdit: true })
   }
 
   recordRow() {
     return (() => {
-      if (true) {
-        return <p>sss</p>
+      if (this.state.budget !== undefined) {
+        return (
+          <div>
+            <p>{this.state.budget}円</p>
+            <button onClick={this.handleEdit}>修正</button>
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <p>まだ登録されてません</p>
+            <button onClick={this.handleEdit}>登録</button>
+          </div>
+        )
       }
     })()
   }
 
   recordEdit() {
-    return <p>a</p>
+    return (
+      <p>
+        <input type="text" defaultValue="0" />円
+      </p>
+    )
   }
 
   render() {

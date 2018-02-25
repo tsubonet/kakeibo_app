@@ -5,7 +5,7 @@ export interface Date {
 }
 export interface Budget {
   price: number
-  done_on: string
+  target_on: string
 }
 
 export interface Record {

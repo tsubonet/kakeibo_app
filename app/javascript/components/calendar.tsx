@@ -1,6 +1,5 @@
 import * as React from 'react'
 import Link from '../components/link'
-import BudgetItem from '../components/budget_item'
 import { getHoliday } from '../utils'
 import { Date, Record, Budget } from '../types/index'
 
@@ -84,7 +83,6 @@ export default class Calendar extends React.Component<Props, State> {
             {this.state.date.year}年<span>{this.state.date.month}</span>月
           </Link>
         </div>
-        <BudgetItem budget={this.state.budget} />
         <table>
           <thead>
             <tr>

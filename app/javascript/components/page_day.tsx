@@ -63,7 +63,7 @@ export default class PageDay extends React.Component<Props, State> {
         </p>
         <dl>
           <dt>
-            <i className="fas fa-hand-point-down" /> この日の結果は...
+            <i className="fas fa-hand-point-down" /> この日の出費は...
           </dt>
           <dd>
             {(() => {
@@ -88,55 +88,11 @@ export default class PageDay extends React.Component<Props, State> {
             return (
               <dl>
                 <dt>
-                  <i className="fas fa-hand-point-down" /> 結果を選択する
+                  <i className="fas fa-hand-point-down" /> 出費を登録する
                 </dt>
                 <dd>
                   <ul>
-                    <li>
-                      <a
-                        onClick={this.selectResult}
-                        className={record !== null && record.result === 'good' ? 'isSelected' : ''}
-                        data-result="good"
-                      >
-                        <span>完璧！</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        onClick={this.selectResult}
-                        className={record !== null && record.result === 'limited' ? 'isSelected' : ''}
-                        data-result="limited"
-                      >
-                        <span>半分くらいできた</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        onClick={this.selectResult}
-                        className={record !== null && record.result === 'wakeup' ? 'isSelected' : ''}
-                        data-result="wakeup"
-                      >
-                        <span>起きただけ</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        onClick={this.selectResult}
-                        className={record !== null && record.result === 'bad' ? 'isSelected' : ''}
-                        data-result="bad"
-                      >
-                        <span>起きれなかった</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        onClick={this.selectResult}
-                        className={record !== null && record.result === 'bad' ? 'isSelected' : ''}
-                        data-result="sick"
-                      >
-                        <span>体調不良</span>
-                      </a>
-                    </li>
+                    <li />
                   </ul>
                 </dd>
               </dl>

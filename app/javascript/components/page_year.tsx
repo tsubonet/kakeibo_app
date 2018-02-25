@@ -29,7 +29,7 @@ export default class PageYear extends React.Component<Props, State> {
           return this.state.recordsYear.map((records, i) => {
             let date = Object.assign({}, this.state.date)
             date.month = i + 1
-            return <Calendar key={i} date={date} records={records} />
+            return <Calendar key={i} date={date} records={records} budget={1} />
           })
         })()}
         <Link href={`/`}>

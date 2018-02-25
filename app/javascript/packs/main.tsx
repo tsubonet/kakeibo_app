@@ -13,8 +13,8 @@ import date from '../reducers/date'
 import record from '../reducers/record'
 import records from '../reducers/records'
 import recordsYear from '../reducers/records_year'
-import budgets from '../reducers/budgets'
 import budget from '../reducers/budget'
+import budgetsYear from '../reducers/budgets_year'
 
 import logger from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
@@ -33,7 +33,7 @@ const App = (props, railsContext) => {
       records,
       recordsYear,
       budget,
-      budgets,
+      budgetsYear,
       router: routerReducer,
     }),
     props,

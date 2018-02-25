@@ -6,10 +6,12 @@ import { Date, Record } from '../types/index'
 
 interface Props {
   date: Date
+  budget: number
   records: Record[]
 }
 interface State {
   date: Date
+  budget: number
   records: Record[]
 }
 export default class PageMonth extends React.Component<Props, State> {

@@ -14,4 +14,5 @@ export interface StoreState {
   record: Record
   records: Record[]
   recordsYear: Record[][]
+  budget: number
 }

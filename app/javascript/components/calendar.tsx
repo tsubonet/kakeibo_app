@@ -6,19 +6,21 @@ import { Date, Record } from '../types/index'
 
 interface Props {
   date: Date
+  budget: number
   records: Record[]
 }
 interface State {
   date: Date
+  budget: number
   records: Record[]
 }
 export default class Calendar extends React.Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
     this.state = props
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     this.setState(nextProps)
   }
 
@@ -78,9 +80,11 @@ export default class Calendar extends React.Component<Props, State> {
     return (
       <div>
         <div data-role="caption">
-          {this.state.date.year}年<span>{this.state.date.month}</span>月
+          <Link href={`/month/${this.state.date.year}/${this.state.date.month}`}>
+            {this.state.date.year}年<span>{this.state.date.month}</span>月
+          </Link>
         </div>
-
+        <Budget budget={this.state.budget} />
         <table>
           <thead>
             <tr>

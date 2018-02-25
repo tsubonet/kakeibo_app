@@ -60,7 +60,7 @@ export default class Router extends React.Component<Props, State> {
     return (
       <div>
         <div>
-          <Link href="/">たいせいくんのラジオ体操</Link>
+          <Link href="/">かんたんな家計簿</Link>
         </div>
         <Switch>
           <Route exact path="/" component={PageMonthContainer} />

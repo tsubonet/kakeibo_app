@@ -89,41 +89,36 @@ export default class PageDay extends React.Component<Props, State> {
             })()}
           </dd>
         </dl>
+        <table>
+          <thead>
+            <tr>
+              <th>項目</th>
+              <th>金額</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <select>
+                  <option>食費</option>
+                  <option>外食費</option>
+                  <option>雑費</option>
+                  <option>子供関係</option>
+                  <option>その他</option>
+                </select>
+              </td>
+              <td>
+                <input type="number" />円
+              </td>
+              <td />
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <button>登録</button>
+        </div>
 
-        <button onClick={this.addInputForm}>
-          <i className="fas fa-hand-point-down" /> 出費を登録する
-        </button>
-
-        {(() => {
-          if (record === null || isEdit === true) {
-            return (
-              <dl>
-                <dt>
-                  <i className="fas fa-hand-point-down" /> 出費を登録する
-                </dt>
-                <dd>
-                  <ul>
-                    <li />
-                  </ul>
-                </dd>
-              </dl>
-            )
-          } else {
-            return (
-              <div style={{ marginBottom: '10px' }}>
-                <a
-                  href="javascript:;"
-                  onClick={() => {
-                    this.setState({ isEdit: true })
-                  }}
-                  className="edit-trigger"
-                >
-                  <i className="fas fa-angle-left" /> 結果を修正する
-                </a>
-              </div>
-            )
-          }
-        })()}
         <Link href={`/month/${date.year}/${date.month}`}>
           <i className="fas fa-angle-left" /> カレンダーにもどる
         </Link>

@@ -21,38 +21,20 @@ export default class PageDay extends React.Component<Props, State> {
     super(props)
     this.state = {
       ...props,
-      isEdit: false,
     }
-    this.selectResult = this.selectResult.bind(this)
-    this.deleteResult = this.deleteResult.bind(this)
-    this.addInputForm = this.addInputForm.bind(this)
+    this.postRecord = this.postRecord.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState(nextProps)
   }
 
-  addInputForm(e) {
+  postRecord(e) {
     e.preventDefault()
-    alert('a')
+    this.props.postRecord(this.state.date, 'a')
   }
 
-  selectResult(e) {
-    e.preventDefault()
-    const result = e.currentTarget.getAttribute('data-result')
-    if (this.state.record !== null) {
-      this.props.patchRecord(this.state.record, result)
-    } else {
-      this.props.postRecord(this.state.date, result)
-    }
-  }
-
-  deleteResult(e) {
-    e.preventDefault()
-    this.props.deleteRecord(this.state.record)
-  }
-
-  getDay() {
+  getDay(): string {
     const { date } = this.state
     const dayNames = ['日', '月', '火', '水', '木', '金', '土']
     const targetDay = new Date(date.year, date.month - 1, date.day)
@@ -74,15 +56,7 @@ export default class PageDay extends React.Component<Props, State> {
           <dd>
             {(() => {
               if (record !== null) {
-                return (
-                  <div className={'result-image ' + record.result}>
-                    <div>
-                      <a onClick={this.deleteResult} className="delete-trigger">
-                        <i className="fas fa-trash-alt fa-2x" />
-                      </a>
-                    </div>
-                  </div>
-                )
+                return <div>aaa</div>
               } else {
                 return <div className="record-empty">まだ記入がありません</div>
               }
@@ -100,23 +74,23 @@ export default class PageDay extends React.Component<Props, State> {
           <tbody>
             <tr>
               <td>
-                <select>
-                  <option>食費</option>
-                  <option>外食費</option>
-                  <option>雑費</option>
-                  <option>子供関係</option>
-                  <option>その他</option>
+                <select ref="type">
+                  <option value="shokuhi">食費</option>
+                  <option value="gaishokuhi">外食費</option>
+                  <option value="zappi">雑費</option>
+                  <option value="kodomo">子供関係</option>
+                  <option value="other">その他</option>
                 </select>
               </td>
               <td>
-                <input type="number" />円
+                <input ref="price" type="number" defaultValue="0" />円
               </td>
               <td />
             </tr>
           </tbody>
         </table>
         <div>
-          <button>登録</button>
+          <button onClick={this.postRecord}>登録</button>
         </div>
 
         <Link href={`/month/${date.year}/${date.month}`}>

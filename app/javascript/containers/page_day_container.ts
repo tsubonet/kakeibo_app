@@ -12,8 +12,8 @@ const mapStateToProps = ({ date, record }: StoreState) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postRecord: (date, result) => {
-      dispatch(postRecord(date, result))
+    postRecord: data => {
+      dispatch(postRecord(data))
     },
     patchRecord: (record, result) => {
       dispatch(patchRecord(record, result))

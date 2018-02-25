@@ -13,11 +13,9 @@ export const getRecord = url => {
   return sendGet(url)
 }
 
-export const postRecord = (date, result) => {
-  return sendPost('/records', {
-    result: result,
-    done_on: `${date.year}-${date.month}-${date.day}`,
-  })
+export const postRecord = data => {
+  console.log(data)
+  return sendPost('/records', data)
 }
 
 export const patchRecord = (record, result) => {

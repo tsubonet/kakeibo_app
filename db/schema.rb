@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20180224104524) do
 
   create_table "records", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "item"
+    t.string "sort"
     t.integer "price"
     t.date "done_on"
     t.datetime "created_at", null: false

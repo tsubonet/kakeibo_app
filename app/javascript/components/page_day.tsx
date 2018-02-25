@@ -6,17 +6,19 @@ import { Date, Record } from '../types/index'
 interface Props {
   date: Date
   record: Record
+  postRecord(data: any): void
   patchRecord(record: Record, result: string): void
-  postRecord(date: Date, result: string): void
   deleteRecord(record: Record): void
 }
 interface State {
   date: Date
   record: Record
-  isEdit: boolean
 }
 
 export default class PageDay extends React.Component<Props, State> {
+  private priceVal: HTMLInputElement
+  private sortVal: HTMLSelectElement
+
   constructor(props) {
     super(props)
     this.state = {
@@ -31,7 +33,12 @@ export default class PageDay extends React.Component<Props, State> {
 
   postRecord(e) {
     e.preventDefault()
-    this.props.postRecord(this.state.date, 'a')
+    const data = {
+      done_on: `${this.state.date.year}-${this.state.date.month}-${this.state.date.day}`,
+      sort: this.sortVal.value,
+      price: this.priceVal.value,
+    }
+    this.props.postRecord(data)
   }
 
   getDay(): string {
@@ -43,7 +50,7 @@ export default class PageDay extends React.Component<Props, State> {
   }
 
   render() {
-    const { date, record, isEdit } = this.state
+    const { date, record } = this.state
     return (
       <div>
         <p>
@@ -74,7 +81,11 @@ export default class PageDay extends React.Component<Props, State> {
           <tbody>
             <tr>
               <td>
-                <select ref="type">
+                <select
+                  ref={(input: HTMLSelectElement) => {
+                    this.sortVal = input
+                  }}
+                >
                   <option value="shokuhi">食費</option>
                   <option value="gaishokuhi">外食費</option>
                   <option value="zappi">雑費</option>
@@ -83,7 +94,13 @@ export default class PageDay extends React.Component<Props, State> {
                 </select>
               </td>
               <td>
-                <input ref="price" type="number" defaultValue="0" />円
+                <input
+                  type="number"
+                  defaultValue="0"
+                  ref={(input: HTMLInputElement) => {
+                    this.priceVal = input
+                  }}
+                />円
               </td>
               <td />
             </tr>

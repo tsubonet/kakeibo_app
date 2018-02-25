@@ -20,19 +20,22 @@ export function fetchRootProps(url, { pushState }, callback): fetchRootProps {
   }
 }
 
+export interface postData {
+  sort: string
+  price: number
+  done_on: string
+}
 export interface postRecord {
   type: constants.POST_RECORD_REQUESTED
   payload: {
-    date: Date
-    result: string
+    data: postData
   }
 }
-export function postRecord(date, result): postRecord {
+export function postRecord(data: postData): postRecord {
   return {
     type: constants.POST_RECORD_REQUESTED,
     payload: {
-      date: date,
-      result: result,
+      data,
     },
   }
 }

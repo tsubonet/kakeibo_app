@@ -27,7 +27,7 @@ function* handleFetchPootProps(action) {
 }
 
 function* handlePostRecord(action) {
-  const { status, record } = yield call(postRecord, action.payload.date, action.payload.result)
+  const { status, record } = yield call(postRecord, action.payload.data)
   if (status === 'success') {
     yield put({ type: 'GET_RECORD', record })
   }

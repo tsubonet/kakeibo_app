@@ -3,6 +3,10 @@ export interface Date {
   month: number
   day: number
 }
+export interface Budget {
+  price: number
+  done_on: string
+}
 
 export interface Record {
   result: string
@@ -14,5 +18,6 @@ export interface StoreState {
   record: Record
   records: Record[]
   recordsYear: Record[][]
-  budget: number
+  budget: Budget
+  budgetsYear: Budget[]
 }

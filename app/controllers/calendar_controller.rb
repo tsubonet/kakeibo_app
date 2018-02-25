@@ -20,6 +20,7 @@ class CalendarController < ApplicationController
             day: 1,
           },
           records: Record.where(done_on: Time.new(year, month, 1).all_month),
+          #budget: Budget.find_by(done_on: "#{year}-#{month}"),
         },
       )
     end
@@ -69,6 +70,7 @@ class CalendarController < ApplicationController
             day: 1,
           },
           recordsYear: records_year,
+          #budgetYear: Budget.where(done_on: "#{year}-#{month}"),
         },
       )
     end

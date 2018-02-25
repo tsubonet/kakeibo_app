@@ -1,17 +1,17 @@
 import * as React from 'react'
 import Link from '../components/link'
-import Budget from '../components/budget'
+import BudgetItem from '../components/budget_item'
 import { getHoliday } from '../utils'
-import { Date, Record } from '../types/index'
+import { Date, Record, Budget } from '../types/index'
 
 interface Props {
   date: Date
-  budget: number
+  budget: Budget
   records: Record[]
 }
 interface State {
   date: Date
-  budget: number
+  budget: Budget
   records: Record[]
 }
 export default class Calendar extends React.Component<Props, State> {
@@ -84,7 +84,7 @@ export default class Calendar extends React.Component<Props, State> {
             {this.state.date.year}年<span>{this.state.date.month}</span>月
           </Link>
         </div>
-        <Budget budget={this.state.budget} />
+        <BudgetItem budget={this.state.budget} />
         <table>
           <thead>
             <tr>

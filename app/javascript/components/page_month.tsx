@@ -2,16 +2,16 @@ import * as React from 'react'
 import Link from '../components/link'
 import Calendar from '../components/calendar'
 import Charts from '../components/charts'
-import { Date, Record } from '../types/index'
+import { Date, Record, Budget } from '../types/index'
 
 interface Props {
   date: Date
-  budget: number
+  budget: Budget
   records: Record[]
 }
 interface State {
   date: Date
-  budget: number
+  budget: Budget
   records: Record[]
 }
 export default class PageMonth extends React.Component<Props, State> {

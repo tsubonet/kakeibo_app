@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export default class Budget extends React.Component<any, any> {
+export default class BudgetItem extends React.Component<any, any> {
   constructor(props) {
     super(props)
     this.state = {

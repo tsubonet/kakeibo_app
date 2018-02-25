@@ -25,10 +25,16 @@ export default class PageDay extends React.Component<Props, State> {
     }
     this.selectResult = this.selectResult.bind(this)
     this.deleteResult = this.deleteResult.bind(this)
+    this.addInputForm = this.addInputForm.bind(this)
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState(nextProps)
+  }
+
+  addInputForm(e) {
+    e.preventDefault()
+    alert('a')
   }
 
   selectResult(e) {
@@ -83,6 +89,11 @@ export default class PageDay extends React.Component<Props, State> {
             })()}
           </dd>
         </dl>
+
+        <button onClick={this.addInputForm}>
+          <i className="fas fa-hand-point-down" /> 出費を登録する
+        </button>
+
         {(() => {
           if (record === null || isEdit === true) {
             return (

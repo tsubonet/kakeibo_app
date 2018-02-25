@@ -14,7 +14,6 @@ export const getRecord = url => {
 }
 
 export const postRecord = data => {
-  console.log(data)
   return sendPost('/records', data)
 }
 

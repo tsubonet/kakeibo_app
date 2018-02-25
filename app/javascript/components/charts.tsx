@@ -25,7 +25,7 @@ export default class Charts extends React.Component<Props, State> {
       badCount = 0,
       sickCount = 0
     this.state.records.forEach(record => {
-      switch (record.result) {
+      switch (record.sort) {
         case 'limited':
           limitedCount++
           break

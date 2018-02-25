@@ -5,13 +5,13 @@ export interface Date {
 }
 
 export interface Record {
-  result: string
+  sort: string
+  price: number
   done_on: string
 }
 
 export interface StoreState {
   date: Date
-  record: Record
   records: Record[]
   recordsYear: Record[][]
 }

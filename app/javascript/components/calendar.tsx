@@ -103,7 +103,7 @@ export default class Calendar extends React.Component<Props, State> {
                     {(() => {
                       return days.map((day, j) => {
                         const dd = cells[j + i * daysLength]
-                        const record = this.state.records.find(record => {
+                        const records = this.state.records.filter(record => {
                           //const pattern = new RegExp('\\d{4}-\\d{2}-' + String(dd).padStart(2, '0'));
                           const pattern = new RegExp(
                             String(this.state.date.year).padStart(4, '0') +
@@ -118,16 +118,14 @@ export default class Calendar extends React.Component<Props, State> {
                           <td className={this.addDayClass(j, dd)} key={j}>
                             {(() => {
                               if (typeof dd !== 'undefined') {
-                                const result = typeof record !== 'undefined' ? record.result : null
                                 return (
-                                  <Link
-                                    href={`/day/${this.state.date.year}/${this.state.date.month}/${dd}`}
-                                    className={'calendar-image ' + result}
-                                  >
+                                  <Link href={`/day/${this.state.date.year}/${this.state.date.month}/${dd}`}>
                                     <div>{dd}</div>
                                     {(() => {
-                                      if (result === null) {
-                                        return <i className={'fas fa-plus-circle fa-2x '} />
+                                      if (records.length) {
+                                        return records.reduce((previous, current) => {
+                                          return previous + current.price
+                                        }, 0)
                                       }
                                     })()}
                                   </Link>

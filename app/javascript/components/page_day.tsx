@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Link from '../components/link'
+import RecordItem from '../components/record_item'
 import { sendPost, sendPatch } from '../utils'
 import { Date, Record } from '../types/index'
 
@@ -51,6 +52,7 @@ export default class PageDay extends React.Component<Props, State> {
 
   render() {
     const { date, records } = this.state
+
     return (
       <div>
         <p>
@@ -63,9 +65,11 @@ export default class PageDay extends React.Component<Props, State> {
           <dd>
             {(() => {
               if (records.length) {
-                return <div>aaa</div>
+                return records.reduce((previous, current) => {
+                  return previous + current.price
+                }, 0)
               } else {
-                return <div className="record-empty">まだ記入がありません</div>
+                return <div>まだ記入がありません</div>
               }
             })()}
           </dd>
@@ -79,6 +83,13 @@ export default class PageDay extends React.Component<Props, State> {
             </tr>
           </thead>
           <tbody>
+            {(() => {
+              if (records.length) {
+                return records.map((record, index) => {
+                  return <RecordItem key={index} record={record} />
+                })
+              }
+            })()}
             <tr>
               <td>
                 <select

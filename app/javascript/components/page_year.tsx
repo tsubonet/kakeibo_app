@@ -6,11 +6,11 @@ import { Date, Record } from '../types/index'
 
 interface Props {
   date: Date
-  records: Record[]
+  recordsYear: Record[][]
 }
 interface State {
   date: Date
-  records: Record[]
+  recordsYear: Record[][]
 }
 export default class PageYear extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -23,19 +23,17 @@ export default class PageYear extends React.Component<Props, State> {
   }
 
   render() {
-    // typescriptが通らないので一時的に
-    // [...Array(12).keys()]をArray.from(Array(12), (v, k) => k)に修正
     return (
       <div>
         {(() => {
-          return Array.from(Array(12), (v, k) => k).map((row, i) => {
+          return this.state.recordsYear.map((records, i) => {
             let date = Object.assign({}, this.state.date)
-            date.month = row + 1
-            return <Calendar key={i} date={date} records={this.state.records} />
+            date.month = i + 1
+            return <Calendar key={i} date={date} records={records} />
           })
         })()}
-        <Link href={`/month/${this.state.date.year}/${this.state.date.month}`}>
-          <i className="fas fa-angle-left" /> もどる
+        <Link href={`/`}>
+          <i className="fas fa-angle-left" /> 今月にもどる
         </Link>
       </div>
     )

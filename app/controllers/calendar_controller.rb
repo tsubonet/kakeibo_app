@@ -17,8 +17,9 @@ class CalendarController < ApplicationController
           date: {
             year: year,
             month: month,
+            day: 1,
           },
-          #records: Record.where(done_on: Time.new(year, month, 1).all_month),
+          records: Record.where(done_on: Time.new(year, month, 1).all_month),
         },
       )
     end
@@ -40,7 +41,7 @@ class CalendarController < ApplicationController
             month: month,
             day: day,
           },
-          #record: Record.find_by(done_on: "#{year}-#{month}-#{day}"),
+          record: Record.find_by(done_on: "#{year}-#{month}-#{day}"),
         },
       )
     end
@@ -54,13 +55,20 @@ class CalendarController < ApplicationController
       rescue StandardError
         year = Time.new.year
       end
+
+      records_year = []
+      (1..12).each do |i|
+        records_year << Record.where(done_on: Time.new(year, i, 1).all_month)
+      end
   
       render_for_react(
         props: {
           date: {
             year: year,
+            month: 1,
+            day: 1,
           },
-          #records: Record.where(done_on: Time.new(year, 1, 1).all_year),
+          recordsYear: records_year,
         },
       )
     end

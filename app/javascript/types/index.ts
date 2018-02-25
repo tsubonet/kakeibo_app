@@ -13,4 +13,5 @@ export interface StoreState {
   date: Date
   record: Record
   records: Record[]
+  recordsYear: Record[][]
 }

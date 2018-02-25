@@ -10,7 +10,6 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 
 import actionPath from '../reducers/action_path'
 import date from '../reducers/date'
-import record from '../reducers/record'
 import records from '../reducers/records'
 import recordsYear from '../reducers/records_year'
 
@@ -27,7 +26,6 @@ const App = (props, railsContext) => {
     combineReducers({
       actionPath,
       date,
-      record,
       records,
       recordsYear,
       router: routerReducer,

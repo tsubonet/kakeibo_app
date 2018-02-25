@@ -5,14 +5,14 @@ import { Date, Record } from '../types/index'
 
 interface Props {
   date: Date
-  record: Record
+  records: Record[]
   postRecord(data: any): void
   patchRecord(record: Record, result: string): void
   deleteRecord(record: Record): void
 }
 interface State {
   date: Date
-  record: Record
+  records: Record[]
 }
 
 export default class PageDay extends React.Component<Props, State> {
@@ -50,7 +50,7 @@ export default class PageDay extends React.Component<Props, State> {
   }
 
   render() {
-    const { date, record } = this.state
+    const { date, records } = this.state
     return (
       <div>
         <p>
@@ -62,7 +62,7 @@ export default class PageDay extends React.Component<Props, State> {
           </dt>
           <dd>
             {(() => {
-              if (record !== null) {
+              if (records.length) {
                 return <div>aaa</div>
               } else {
                 return <div className="record-empty">まだ記入がありません</div>

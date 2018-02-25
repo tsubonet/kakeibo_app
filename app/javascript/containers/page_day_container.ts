@@ -3,10 +3,10 @@ import { postRecord, patchRecord, deleteRecord } from '../actions/records'
 import PageDay from '../components/page_day'
 import { StoreState } from '../types/index'
 
-const mapStateToProps = ({ date, record }: StoreState) => {
+const mapStateToProps = ({ date, records }: StoreState) => {
   return {
     date,
-    record,
+    records,
   }
 }
 

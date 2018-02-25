@@ -41,7 +41,7 @@ class CalendarController < ApplicationController
             month: month,
             day: day,
           },
-          record: Record.find_by(done_on: "#{year}-#{month}-#{day}"),
+          records: Record.where(done_on: Time.new(year, month, day)),
         },
       )
     end

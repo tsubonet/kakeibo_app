@@ -30,9 +30,9 @@ function* handlePostRecord(action) {
 }
 
 function* handlePatchRecord(action) {
-  const { status, record } = yield call(patchRecord, action.payload.record, action.payload.result)
+  const { status, record } = yield call(patchRecord, action.payload.record, action.payload.data)
   if (status === 'success') {
-    yield put({ type: 'GET_RECORD', record })
+    yield put({ type: 'PATCH_RECORD', record })
   }
 }
 

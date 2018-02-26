@@ -17,10 +17,8 @@ export const postRecord = data => {
   return sendPost('/records', data)
 }
 
-export const patchRecord = (record, result) => {
-  return sendPatch(`/records/${record.id}`, {
-    result: result,
-  })
+export const patchRecord = (record, data) => {
+  return sendPatch(`/records/${record.id}`, data)
 }
 
 export const deleteRecord = record => {

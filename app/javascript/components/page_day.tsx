@@ -8,7 +8,7 @@ interface Props {
   date: Date
   records: Record[]
   postRecord(data: any): void
-  patchRecord(record: Record, result: string): void
+  patchRecord(record: Record, data: any): void
   deleteRecord(record: Record): void
 }
 export default class PageDay extends React.Component<Props> {
@@ -80,7 +80,14 @@ export default class PageDay extends React.Component<Props> {
             {(() => {
               if (records.length) {
                 return records.map((record, index) => {
-                  return <RecordItem key={index} record={record} onDelete={this.props.deleteRecord} />
+                  return (
+                    <RecordItem
+                      key={index}
+                      record={record}
+                      onDelete={this.props.deleteRecord}
+                      onUpdate={this.props.patchRecord}
+                    />
+                  )
                 })
               }
             })()}

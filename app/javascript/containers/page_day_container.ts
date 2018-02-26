@@ -15,8 +15,8 @@ const mapDispatchToProps = dispatch => {
     postRecord: data => {
       dispatch(postRecord(data))
     },
-    patchRecord: (record, result) => {
-      dispatch(patchRecord(record, result))
+    patchRecord: (record, data) => {
+      dispatch(patchRecord(record, data))
     },
     deleteRecord: record => {
       dispatch(deleteRecord(record))

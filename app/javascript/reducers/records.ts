@@ -4,6 +4,14 @@ export default function reducer(state = [], action) {
       return action.records
     case 'POST_RECORD':
       return [...state, action.record]
+    case 'PATCH_RECORD':
+      return [...state].map(record => {
+        if (record.id === action.record.id) {
+          return action.record
+        } else {
+          return record
+        }
+      })
     case 'DELETE_RECORD':
       return [...state].filter(record => record.id !== action.record.id)
     default:

@@ -40,19 +40,23 @@ export function postRecord(data: postData): postRecord {
   }
 }
 
+export interface patchData {
+  sort: string
+  price: number
+}
 export interface patchRecord {
   type: constants.PATCH_RECORD_REQUESTED
   payload: {
     record: Record
-    result: string
+    data: patchData
   }
 }
-export function patchRecord(record, result): patchRecord {
+export function patchRecord(record, data): patchRecord {
   return {
     type: constants.PATCH_RECORD_REQUESTED,
     payload: {
       record,
-      result,
+      data,
     },
   }
 }

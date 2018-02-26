@@ -11,31 +11,20 @@ interface Props {
   patchRecord(record: Record, result: string): void
   deleteRecord(record: Record): void
 }
-interface State {
-  date: Date
-  records: Record[]
-}
-
-export default class PageDay extends React.Component<Props, State> {
+export default class PageDay extends React.Component<Props> {
   private priceVal: HTMLInputElement
   private sortVal: HTMLSelectElement
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
-    this.state = {
-      ...props,
-    }
     this.postRecord = this.postRecord.bind(this)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState(nextProps)
   }
 
   postRecord(e) {
     e.preventDefault()
+    const { date } = this.props
     const data = {
-      done_on: `${this.state.date.year}-${this.state.date.month}-${this.state.date.day}`,
+      done_on: `${date.year}-${date.month}-${date.day}`,
       sort: this.sortVal.value,
       price: this.priceVal.value,
     }
@@ -43,7 +32,7 @@ export default class PageDay extends React.Component<Props, State> {
   }
 
   getDay(): string {
-    const { date } = this.state
+    const { date } = this.props
     const dayNames = ['日', '月', '火', '水', '木', '金', '土']
     const targetDay = new Date(date.year, date.month - 1, date.day)
     const day = targetDay.getDay()
@@ -51,7 +40,7 @@ export default class PageDay extends React.Component<Props, State> {
   }
 
   render() {
-    const { date, records } = this.state
+    const { date, records } = this.props
 
     return (
       <div>

@@ -8,7 +8,6 @@ import { BrowserRouter } from 'react-router-dom'
 import RouterContainer from '../containers/router_container'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 
-import actionPath from '../reducers/action_path'
 import date from '../reducers/date'
 import records from '../reducers/records'
 import recordsYear from '../reducers/records_year'
@@ -24,7 +23,6 @@ const App = (props, railsContext) => {
   const sagaMiddleware = createSagaMiddleware()
   const store = createStore(
     combineReducers({
-      actionPath,
       date,
       records,
       recordsYear,

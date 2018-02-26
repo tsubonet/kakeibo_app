@@ -12,26 +12,13 @@ interface Props {
   transitTo(url: string, { pushState }, callback): void
   history: any
 }
-interface State {
-  rootProps: Props
-}
-export default class Router extends React.Component<Props, State> {
+export default class Router extends React.Component<Props> {
   static childContextTypes = {
     onLinkClick: PropTypes.func,
   }
 
   constructor(props: Props) {
-    //super(...args)
     super(props)
-    this.state = {
-      rootProps: props,
-    }
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    this.setState({
-      rootProps: nextProps,
-    })
   }
 
   getChildContext() {
@@ -41,18 +28,20 @@ export default class Router extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+    const { transitTo } = this.props
     window.addEventListener('popstate', () => {
       const url: string = document.location.href
-      this.props.transitTo(url, { pushState: false })
+      transitTo(url, { pushState: false })
     })
   }
 
   onLinkClick(event: any): void {
     if (!event.metaKey) {
       event.preventDefault()
+      const { transitTo, history } = this.props
       const anchorElement = event.currentTarget.pathname ? event.currentTarget : event.currentTarget.querySelector('a')
       const url: string = anchorElement.getAttribute('href')
-      this.props.transitTo(url, { pushState: true }, () => this.props.history.push(url))
+      transitTo(url, { pushState: true }, () => history.push(url))
     }
   }
 

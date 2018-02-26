@@ -4,8 +4,7 @@ import { getRecord, postRecord, patchRecord, deleteRecord, loadingStart, loading
 function* handleFetchPootProps(action) {
   try {
     loadingStart()
-    const { actionPath, date, records, recordsYear } = yield call(getRecord, action.payload.url)
-    yield put({ type: 'GET_ACTION_PATH', actionPath })
+    const { date, records, recordsYear } = yield call(getRecord, action.payload.url)
     yield put({ type: 'GET_DATE', date })
     if (typeof records !== 'undefined') {
       yield put({ type: 'GET_RECORDS', records })

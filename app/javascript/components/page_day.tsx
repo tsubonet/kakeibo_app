@@ -22,13 +22,13 @@ export default class PageDay extends React.Component<Props> {
 
   postRecord(e) {
     e.preventDefault()
-    const { date } = this.props
+    const { date, postRecord } = this.props
     const data = {
       done_on: `${date.year}-${date.month}-${date.day}`,
       sort: this.sortVal.value,
       price: this.priceVal.value,
     }
-    this.props.postRecord(data)
+    postRecord(data)
   }
 
   getDay(): string {
@@ -80,7 +80,7 @@ export default class PageDay extends React.Component<Props> {
             {(() => {
               if (records.length) {
                 return records.map((record, index) => {
-                  return <RecordItem key={index} record={record} />
+                  return <RecordItem key={index} record={record} onDelete={this.props.deleteRecord} />
                 })
               }
             })()}

@@ -13,9 +13,9 @@ export function fetchRootProps(url, { pushState }, callback): fetchRootProps {
   return {
     type: constants.FETCH_ROOT_RROPS_REQUESTED,
     payload: {
-      url: url,
-      pushState: pushState,
-      callback: callback,
+      url,
+      pushState,
+      callback,
     },
   }
 }
@@ -51,8 +51,8 @@ export function patchRecord(record, result): patchRecord {
   return {
     type: constants.PATCH_RECORD_REQUESTED,
     payload: {
-      record: record,
-      result: result,
+      record,
+      result,
     },
   }
 }
@@ -63,11 +63,11 @@ export interface deleteRecord {
     record: Record
   }
 }
-export function deleteRecord(record): deleteRecord {
+export function deleteRecord(record: Record): deleteRecord {
   return {
     type: constants.DELETE_RECORD_REQUESTED,
     payload: {
-      record: record,
+      record,
     },
   }
 }

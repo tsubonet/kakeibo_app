@@ -5,7 +5,7 @@ export default function reducer(state = [], action) {
     case 'POST_RECORD':
       return [...state, action.record]
     case 'DELETE_RECORD':
-      return null
+      return [...state].filter(record => record.id !== action.record.id)
     default:
       return state
   }

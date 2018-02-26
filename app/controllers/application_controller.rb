@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def common_props
     {
-      actionPath: action_path,
+      #actionPath: action_path,
       #currentUser: current_user,
     }
   end

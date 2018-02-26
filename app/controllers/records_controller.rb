@@ -44,6 +44,7 @@ class RecordsController < ApplicationController
       record = Record.find(params[:id])
       if record.destroy
         response_data = {
+          record: record,
           status: 'success',
           txt: ['削除しました！'],
         }

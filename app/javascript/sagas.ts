@@ -37,9 +37,9 @@ function* handlePatchRecord(action) {
 }
 
 function* handleDeleteRecord(action) {
-  const { status } = yield call(deleteRecord, action.payload.record)
+  const { status, record } = yield call(deleteRecord, action.payload.record)
   if (status === 'success') {
-    yield put({ type: 'DELETE_RECORD' })
+    yield put({ type: 'DELETE_RECORD', record })
   }
 }
 

@@ -54,7 +54,7 @@ export default class PageDay extends React.Component<Props, State> {
 
   render() {
     const { date, records, deleteRecord, patchRecord } = this.props
-    const { sort, price } = this.state
+    const { sort, price, sortCustom } = this.state
     return (
       <div>
         <p>
@@ -119,6 +119,7 @@ export default class PageDay extends React.Component<Props, State> {
                     return (
                       <input
                         type="text"
+                        value={sortCustom}
                         onChange={e => {
                           this.setState({ sortCustom: e.target.value })
                         }}

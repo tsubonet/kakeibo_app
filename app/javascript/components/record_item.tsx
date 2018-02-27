@@ -51,7 +51,7 @@ export default class RecordItem extends React.Component<Props, State> {
   }
 
   render() {
-    const { isEdit, sort, price } = this.state
+    const { isEdit, sort, price, sortCustom } = this.state
     if (isEdit) {
       return (
         <tr>
@@ -74,6 +74,7 @@ export default class RecordItem extends React.Component<Props, State> {
                 return (
                   <input
                     type="text"
+                    value={sortCustom}
                     onChange={e => {
                       this.setState({ sortCustom: e.target.value })
                     }}

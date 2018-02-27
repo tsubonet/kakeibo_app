@@ -5,8 +5,9 @@ export interface Date {
 }
 
 export interface Record {
+  id: number
   sort: string
-  price: any // numberにするとdefalutValueエラー...
+  price: number
   done_on: string
 }
 

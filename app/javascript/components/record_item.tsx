@@ -8,16 +8,19 @@ interface Props {
 }
 interface State {
   isEdit: boolean
+  sort: string
+  sortCustom: string
+  price: number
 }
 
 export default class RecordItem extends React.Component<Props, State> {
-  private sortVal: HTMLSelectElement
-  private priceVal: HTMLInputElement
-
   constructor(props) {
     super(props)
     this.state = {
       isEdit: false,
+      sort: props.record.sort,
+      price: props.record.price,
+      sortCustom: '',
     }
     this.handleDelete = this.handleDelete.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
@@ -37,40 +40,54 @@ export default class RecordItem extends React.Component<Props, State> {
   handleUpdate(e) {
     e.preventDefault()
     const { record, onUpdate } = this.props
+    const { sort, sortCustom, price } = this.state
+    const tempSort = sort === '項目を入力する' ? sortCustom : sort
     const data = {
-      sort: this.sortVal.value,
-      price: this.priceVal.value,
+      sort: tempSort,
+      price,
     }
     onUpdate(record, data)
     this.setState({ isEdit: false })
   }
 
   render() {
-    const { record } = this.props
-    const { isEdit } = this.state
+    const { isEdit, sort, price } = this.state
     if (isEdit) {
       return (
         <tr>
           <td>
             <select
-              ref={(input: HTMLSelectElement) => {
-                this.sortVal = input
+              value={sort}
+              onChange={e => {
+                this.setState({ sort: e.target.value })
               }}
-              defaultValue={record.sort}
             >
               <option value="食費">食費</option>
               <option value="外食費">外食費</option>
               <option value="雑費">雑費</option>
               <option value="子供関係">子供関係</option>
               <option value="その他">その他</option>
+              <option value="項目を入力する">項目を入力する</option>
             </select>
+            {(() => {
+              if (sort === '項目を入力する') {
+                return (
+                  <input
+                    type="text"
+                    onChange={e => {
+                      this.setState({ sortCustom: e.target.value })
+                    }}
+                  />
+                )
+              }
+            })()}
           </td>
           <td>
             <input
               type="number"
-              defaultValue={record.price}
-              ref={(input: HTMLInputElement) => {
-                this.priceVal = input
+              value={price}
+              onChange={e => {
+                this.setState({ price: parseInt(e.target.value) })
               }}
             />円
           </td>
@@ -82,8 +99,8 @@ export default class RecordItem extends React.Component<Props, State> {
     } else {
       return (
         <tr>
-          <td>{record.sort}</td>
-          <td>{record.price}円</td>
+          <td>{sort}</td>
+          <td>{price}円</td>
           <td>
             <button onClick={this.handleEdit}>編集</button>
             <button onClick={this.handleDelete}>削除</button>

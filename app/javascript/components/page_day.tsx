@@ -1,7 +1,6 @@
 import * as React from 'react'
 import Link from '../components/link'
 import RecordItem from '../components/record_item'
-import { sendPost, sendPatch } from '../utils'
 import { Date, Record } from '../types/index'
 
 interface Props {
@@ -11,26 +10,38 @@ interface Props {
   patchRecord(record: Record, data: any): void
   deleteRecord(record: Record): void
 }
-export default class PageDay extends React.Component<Props> {
-  private priceVal: HTMLInputElement
-  private sortVal: HTMLSelectElement
-
+interface State {
+  sort: string
+  sortCustom: string
+  price: number
+}
+export default class PageDay extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props)
+    this.state = {
+      sort: '食費',
+      sortCustom: '',
+      price: 0,
+    }
     this.postRecord = this.postRecord.bind(this)
   }
 
   postRecord(e) {
     e.preventDefault()
     const { date, postRecord } = this.props
+    const { sort, sortCustom, price } = this.state
+    const tempSort = sort === '項目を入力する' ? sortCustom : sort
     const data = {
       done_on: `${date.year}-${date.month}-${date.day}`,
-      sort: this.sortVal.value,
-      price: this.priceVal.value,
+      sort: tempSort,
+      price,
     }
-    this.sortVal.value = '食費'
-    this.priceVal.value = '0'
     postRecord(data)
+    this.setState({
+      sort: '食費',
+      sortCustom: '',
+      price: 0,
+    })
   }
 
   getDay(): string {
@@ -42,8 +53,8 @@ export default class PageDay extends React.Component<Props> {
   }
 
   render() {
-    const { date, records } = this.props
-
+    const { date, records, deleteRecord, patchRecord } = this.props
+    const { sort, price } = this.state
     return (
       <div>
         <p>
@@ -83,23 +94,17 @@ export default class PageDay extends React.Component<Props> {
           <tbody>
             {(() => {
               if (records.length) {
-                return records.map((record, index) => {
-                  return (
-                    <RecordItem
-                      key={index}
-                      record={record}
-                      onDelete={this.props.deleteRecord}
-                      onUpdate={this.props.patchRecord}
-                    />
-                  )
+                return records.map(record => {
+                  return <RecordItem key={record.id} record={record} onDelete={deleteRecord} onUpdate={patchRecord} />
                 })
               }
             })()}
             <tr>
               <td>
                 <select
-                  ref={(input: HTMLSelectElement) => {
-                    this.sortVal = input
+                  value={sort}
+                  onChange={e => {
+                    this.setState({ sort: e.target.value })
                   }}
                 >
                   <option value="食費">食費</option>
@@ -107,14 +112,27 @@ export default class PageDay extends React.Component<Props> {
                   <option value="雑費">雑費</option>
                   <option value="子供関係">子供関係</option>
                   <option value="その他">その他</option>
+                  <option value="項目を入力する">項目を入力する</option>
                 </select>
+                {(() => {
+                  if (sort === '項目を入力する') {
+                    return (
+                      <input
+                        type="text"
+                        onChange={e => {
+                          this.setState({ sortCustom: e.target.value })
+                        }}
+                      />
+                    )
+                  }
+                })()}
               </td>
               <td>
                 <input
                   type="number"
-                  defaultValue="0"
-                  ref={(input: HTMLInputElement) => {
-                    this.priceVal = input
+                  value={price}
+                  onChange={e => {
+                    this.setState({ price: parseInt(e.target.value) })
                   }}
                 />円
               </td>

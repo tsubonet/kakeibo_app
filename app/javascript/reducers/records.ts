@@ -6,11 +6,7 @@ export default function reducer(state = [], action) {
       return [...state, action.record]
     case 'PATCH_RECORD':
       return [...state].map(record => {
-        if (record.id === action.record.id) {
-          return action.record
-        } else {
-          return record
-        }
+        return record.id === action.record.id ? action.record : record
       })
     case 'DELETE_RECORD':
       return [...state].filter(record => record.id !== action.record.id)

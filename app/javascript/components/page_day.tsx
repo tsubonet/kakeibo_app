@@ -28,6 +28,8 @@ export default class PageDay extends React.Component<Props> {
       sort: this.sortVal.value,
       price: this.priceVal.value,
     }
+    this.sortVal.value = '食費'
+    this.priceVal.value = '0'
     postRecord(data)
   }
 
@@ -64,6 +66,8 @@ export default class PageDay extends React.Component<Props> {
                     円
                   </div>
                 )
+              } else {
+                return <div>まだ登録されてません</div>
               }
             })()}
           </dd>
@@ -98,11 +102,11 @@ export default class PageDay extends React.Component<Props> {
                     this.sortVal = input
                   }}
                 >
-                  <option value="shokuhi">食費</option>
-                  <option value="gaishokuhi">外食費</option>
-                  <option value="zappi">雑費</option>
-                  <option value="kodomo">子供関係</option>
-                  <option value="other">その他</option>
+                  <option value="食費">食費</option>
+                  <option value="外食費">外食費</option>
+                  <option value="雑費">雑費</option>
+                  <option value="子供関係">子供関係</option>
+                  <option value="その他">その他</option>
                 </select>
               </td>
               <td>

@@ -58,11 +58,11 @@ export default class RecordItem extends React.Component<Props, State> {
               }}
               defaultValue={record.sort}
             >
-              <option value="shokuhi">食費</option>
-              <option value="gaishokuhi">外食費</option>
-              <option value="zappi">雑費</option>
-              <option value="kodomo">子供関係</option>
-              <option value="other">その他</option>
+              <option value="食費">食費</option>
+              <option value="外食費">外食費</option>
+              <option value="雑費">雑費</option>
+              <option value="子供関係">子供関係</option>
+              <option value="その他">その他</option>
             </select>
           </td>
           <td>

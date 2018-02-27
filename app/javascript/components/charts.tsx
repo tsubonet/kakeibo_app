@@ -5,6 +5,7 @@ import { Date, Record } from '../types/index'
 interface Props {
   records: Record[]
 }
+
 export default class Charts extends React.Component<Props> {
   constructor(props: Props) {
     super(props)
@@ -12,37 +13,37 @@ export default class Charts extends React.Component<Props> {
 
   render() {
     const { records } = this.props
-    let limitedCount = 0,
-      goodCount = 0,
-      wakeupCount = 0,
-      badCount = 0,
-      sickCount = 0
-    records.forEach(record => {
-      switch (record.sort) {
-        case 'limited':
-          limitedCount++
-          break
-        case 'good':
-          goodCount++
-          break
-        case 'wakeup':
-          wakeupCount++
-          break
-        case 'bad':
-          badCount++
-          break
-        case 'sick':
-          sickCount++
-          break
+
+    const data = records.reduce((result, current) => {
+      const element = result.find(p => p.name === current.sort)
+      if (element) {
+        element.count++ // count
+        element.value += current.price // sum
+      } else {
+        result.push({
+          name: current.sort,
+          count: 1,
+          value: current.price,
+        })
       }
-    })
-    const data = [
-      { name: '完璧！', value: goodCount },
-      { name: '半分くらいできた', value: limitedCount },
-      { name: '起きただけ', value: wakeupCount },
-      { name: '起きれなかった', value: badCount },
-      { name: '体調不良', value: sickCount },
-    ]
+      return result
+    }, [])
+
+    // const data = records.reduce((result, current) => {
+    //   const element = result.find(p => p.sort === current.sort)
+    //   if (element) {
+    //     element.count++ // count
+    //     element.price += current.price // sum
+    //   } else {
+    //     result.push({
+    //       sort: current.sort,
+    //       count: 1,
+    //       price: current.price,
+    //     })
+    //   }
+    //   return result
+    // }, [])
+
     const containerStyle = {
       WebkitBoxSizing: 'border-box',
       boxSizing: 'border-box',
@@ -64,7 +65,7 @@ export default class Charts extends React.Component<Props> {
                     <Pie data={data} dataKey="value" startAngle={90} endAngle={-270}>
                       {data.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
                     </Pie>
-                    <Tooltip />
+                    <Tooltip payload={[{ unit: '円' }]} />
                     <Legend />
                   </PieChart>
                 </ResponsiveContainer>

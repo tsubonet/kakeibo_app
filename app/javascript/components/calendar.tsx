@@ -49,6 +49,13 @@ export default class Calendar extends React.Component<Props> {
     return decorate.length === 0 ? null : decorate.join(' ')
   }
 
+  getExposesSum() {
+    const { records } = this.props
+    return records.reduce((result, current) => {
+      return result + current.price
+    }, 0)
+  }
+
   render() {
     const { date, records } = this.props
     const days = ['月', '火', '水', '木', '金', '土', '日']
@@ -71,6 +78,11 @@ export default class Calendar extends React.Component<Props> {
             {date.year}年<span>{date.month}</span>月
           </Link>
         </div>
+        {(() => {
+          if (records.length) {
+            return <p>この月の出費は合計{this.getExposesSum()}円です</p>
+          }
+        })()}
         <table>
           <thead>
             <tr>

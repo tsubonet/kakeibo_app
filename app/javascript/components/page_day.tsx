@@ -2,6 +2,7 @@ import * as React from 'react'
 import Link from '../components/link'
 import RecordItem from '../components/record_item'
 import { Date, Record } from '../types/index'
+import InputExpense from './input_expense'
 
 interface Props {
   date: Date
@@ -10,38 +11,20 @@ interface Props {
   patchRecord(record: Record, data: any): void
   deleteRecord(record: Record): void
 }
-interface State {
-  sort: string
-  sortCustom: string
-  price: number
-}
-export default class PageDay extends React.Component<Props, State> {
+
+export default class PageDay extends React.Component<Props> {
   constructor(props: Props) {
     super(props)
-    this.state = {
-      sort: '食費',
-      sortCustom: '',
-      price: 0,
-    }
-    this.postRecord = this.postRecord.bind(this)
+    this.onCreate = this.onCreate.bind(this)
   }
 
-  postRecord(e) {
-    e.preventDefault()
+  onCreate(data) {
     const { date, postRecord } = this.props
-    const { sort, sortCustom, price } = this.state
-    const tempSort = sort === '項目を入力する' ? sortCustom : sort
-    const data = {
+    const _data = {
+      ...data,
       done_on: `${date.year}-${date.month}-${date.day}`,
-      sort: tempSort,
-      price,
     }
-    postRecord(data)
-    this.setState({
-      sort: '食費',
-      sortCustom: '',
-      price: 0,
-    })
+    postRecord(_data)
   }
 
   getDay(): string {
@@ -54,7 +37,6 @@ export default class PageDay extends React.Component<Props, State> {
 
   render() {
     const { date, records, deleteRecord, patchRecord } = this.props
-    const { sort, price, sortCustom } = this.state
     return (
       <div>
         <p>
@@ -99,52 +81,9 @@ export default class PageDay extends React.Component<Props, State> {
                 })
               }
             })()}
-            <tr>
-              <td>
-                <select
-                  value={sort}
-                  onChange={e => {
-                    this.setState({ sort: e.target.value })
-                  }}
-                >
-                  <option value="食費">食費</option>
-                  <option value="外食費">外食費</option>
-                  <option value="雑費">雑費</option>
-                  <option value="子供関係">子供関係</option>
-                  <option value="その他">その他</option>
-                  <option value="項目を入力する">項目を入力する</option>
-                </select>
-                {(() => {
-                  if (sort === '項目を入力する') {
-                    return (
-                      <input
-                        type="text"
-                        value={sortCustom}
-                        onChange={e => {
-                          this.setState({ sortCustom: e.target.value })
-                        }}
-                      />
-                    )
-                  }
-                })()}
-              </td>
-              <td>
-                <input
-                  type="number"
-                  value={price}
-                  onChange={e => {
-                    this.setState({ price: parseInt(e.target.value) })
-                  }}
-                />円
-              </td>
-              <td />
-            </tr>
+            <InputExpense sort="食費" price={0} onCreate={this.onCreate} />
           </tbody>
         </table>
-        <div>
-          <button onClick={this.postRecord}>登録</button>
-        </div>
-
         <Link href={`/month/${date.year}/${date.month}`}>
           <i className="fas fa-angle-left" /> カレンダーにもどる
         </Link>

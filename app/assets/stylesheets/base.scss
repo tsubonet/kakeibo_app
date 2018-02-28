@@ -1,5 +1,6 @@
 body {
   color: #767676;
+  min-width: 320px;
   @media (max-width: 640px) {
     font-size: 14px;
   }
@@ -8,4 +9,5 @@ body {
 a {
   text-decoration: none;
   color: #767676;
+  cursor: pointer;
 }

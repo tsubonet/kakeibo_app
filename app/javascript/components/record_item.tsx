@@ -58,15 +58,27 @@ export default class RecordItem extends React.Component<Props, State> {
           <td>{sort}</td>
           <td>{price}円</td>
           <td>
-            <a onClick={this.handleEdit}>
+            <Button onClick={this.handleEdit}>
+              <i className="fas fa-edit fa-2x" />
+            </Button>
+            <Button onClick={this.handleDelete}>
               <i className="fas fa-trash-alt fa-2x" />
-            </a>{' '}
-            <a onClick={this.handleDelete}>
-              <i className="fas fa-trash-alt fa-2x" />
-            </a>
+            </Button>
           </td>
         </tr>
       )
     }
   }
 }
+
+const Button = styled.a`
+  ${media.pc`
+    &:first-child {margin-right: 10px;}
+  `};
+  ${media.sp`
+    &:first-child {margin-right: 5px;}
+  `};
+  i {
+    transform: scale(0.8);
+  }
+`

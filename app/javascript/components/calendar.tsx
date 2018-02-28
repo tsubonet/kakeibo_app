@@ -241,7 +241,7 @@ const CalendarDate = styled.div`
   position: absolute;
   top: 5px;
   left: 5px;
-  font-size: 14px;
+  ${media.pc`font-size: 14px;`};
   ${media.sp`font-size: 12px;`};
 `
 const ExposeADay = styled.div`
@@ -250,7 +250,7 @@ const ExposeADay = styled.div`
   ${media.sp`font-size: 8px;`};
   span {
     font-weight: bold;
-    font-size: 20px;
+    ${media.pc`font-size: 20px;`};
     ${media.sp`font-size: 11px;`};
   }
 `

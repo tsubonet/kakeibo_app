@@ -17,6 +17,7 @@ interface State {
 }
 
 export default class InputExpense extends React.Component<Props, State> {
+  private sortCustomRef: HTMLInputElement
   constructor(props) {
     super(props)
     this.state = {
@@ -83,7 +84,11 @@ export default class InputExpense extends React.Component<Props, State> {
                 <div>
                   <InputSortCustom
                     type="text"
+                    placeholder="項目を入力"
                     value={sortCustom}
+                    innerRef={(input: HTMLInputElement) => {
+                      return input && input.focus()
+                    }}
                     onChange={e => {
                       this.setState({ sortCustom: e.target.value })
                     }}
@@ -118,7 +123,6 @@ export default class InputExpense extends React.Component<Props, State> {
 }
 
 const SelectSortWrapper = styled.div`
-  width: 100px;
   position: relative;
   background: #fff;
   &::before {
@@ -143,20 +147,24 @@ const SelectSort = styled.select`
   border: 1px solid #ccc;
   border-radius: 3px;
   padding: 10px 30px 10px 10px;
-  width: 100px;
+  width: 100%;
 `
 const InputSortCustom = styled.input`
+  width: 100%;
   margin-top: 10px;
   padding: 10px;
+  box-sizing: border-box;
 `
 const InputPrice = styled.input`
   padding: 10px;
-  width: 100px;
   box-sizing: border-box;
+  ${media.pc`width: 100px;`};
+  ${media.sp`width: 78%;`};
 `
 const Button = styled.button`
-  padding: 10px 20px;
   background: none;
   border-radius: 3px;
   background: rgba(191, 255, 182, 0.3);
+  ${media.pc`padding: 10px 20px;`};
+  ${media.sp`padding: 10px 10px;`};
 `

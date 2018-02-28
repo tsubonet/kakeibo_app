@@ -121,6 +121,8 @@ const ExpenseResult = styled.dl`
 `
 const ExpenseDetail = styled.table`
   width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
   border-collapse: collapse;
   border: none;
   margin-bottom: 40px;
@@ -133,9 +135,28 @@ const ExpenseDetail = styled.table`
     padding: 10px;
     font-weight: bold;
     border-bottom: 4px solid #ccc;
+    ${media.pc`
+      &:first-child {width: 40%;}
+      &:nth-child(2) {width: 40%;}
+    `};
+    ${media.sp`
+      &:first-child {width: 34%;}
+      &:nth-child(2) {width: 34%;}
+    `};
   }
   td {
+    white-space: no-wrap;
     padding: 20px 10px;
+    &:nth-child(2) {
+      ${media.sp`padding-right: 0;`};
+    }
+    &:last-child {
+      text-align: center;
+      ${media.sp`
+        padding-left: 5px;
+        padding-right: 5px;
+      `};
+    }
   }
   tr:nth-child(even) td {
     background: #f5f5f5;

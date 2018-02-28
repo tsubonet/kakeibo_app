@@ -232,18 +232,18 @@ const sendDelete = url => {
 }
 
 const media = {
-  // pc: (...args) => css`
-  //  @media (min-width: 992px) {
-  //    ${css(...args)};
-  //  }
-  //`,
+  pc: (...args) => css`
+    @media (min-width: 768px) {
+      ${css(...args)};
+    }
+  `,
   // tablet: (...args) => css`
   //   @media (min-width: 768px) {
   //     ${ css(...args) }
   //   }
   // `,
   sp: (...args) => css`
-    @media (max-width: 640px) {
+    @media (max-width: 767px) {
       ${css(...args)};
     }
   `,

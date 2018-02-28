@@ -36,8 +36,8 @@ export default class PageMonth extends React.Component<Props> {
     const { date } = this.props
     return (
       <div>
-        <nav>
-          <ControllNav>
+        <ControllNav>
+          <ul>
             <li>
               <Link href={this.prevCalendar()}>
                 <i className="fas fa-angle-left fa-2x" />
@@ -58,8 +58,8 @@ export default class PageMonth extends React.Component<Props> {
                 {date.year}年一覧
               </Link>
             </li>
-          </ControllNav>
-        </nav>
+          </ul>
+        </ControllNav>
         <Calendar {...this.props} />
         <Charts {...this.props} />
       </div>
@@ -67,20 +67,22 @@ export default class PageMonth extends React.Component<Props> {
   }
 }
 
-const ControllNav = styled.ul`
-  padding: 0;
-  text-align: right;
-  li {
-    list-style: none;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 20px;
-    a[data-type='btn'] {
-      background: #f5f5f5;
-      padding: 10px 10px;
-      transition: background 0.3s;
-      &:hover {
-        background: #ccc;
+const ControllNav = styled.nav`
+  ul {
+    padding: 0;
+    text-align: right;
+    li {
+      list-style: none;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 20px;
+      a[data-type='btn'] {
+        background: #f5f5f5;
+        padding: 10px 10px;
+        transition: background 0.3s;
+        &:hover {
+          background: #ccc;
+        }
       }
     }
   }

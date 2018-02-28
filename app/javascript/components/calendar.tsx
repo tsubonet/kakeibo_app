@@ -1,7 +1,8 @@
 import * as React from 'react'
 import Link from '../components/link'
-import { getHoliday } from '../utils'
+import { getHoliday, media } from '../utils'
 import { Date, Record } from '../types/index'
+import styled from 'styled-components'
 
 interface Props {
   date: Date
@@ -73,17 +74,21 @@ export default class Calendar extends React.Component<Props> {
 
     return (
       <div>
-        <div data-role="caption">
+        <Caption>
           <Link href={`/month/${date.year}/${date.month}`}>
             {date.year}年<span>{date.month}</span>月
           </Link>
-        </div>
+        </Caption>
         {(() => {
           if (records.length) {
-            return <p>この月の出費は合計{this.getExposesSum()}円です</p>
+            return (
+              <Discription>
+                この月の支出は合計 <span>{this.getExposesSum()}</span> 円です
+              </Discription>
+            )
           }
         })()}
-        <table>
+        <CalendarTable>
           <thead>
             <tr>
               {(() => {
@@ -122,19 +127,23 @@ export default class Calendar extends React.Component<Props> {
                               if (typeof dd !== 'undefined') {
                                 return (
                                   <Link href={`/day/${date.year}/${date.month}/${dd}`}>
-                                    <div>{dd}</div>
+                                    <CalendarDate>{dd}</CalendarDate>
                                     {(() => {
                                       if (filteredRecords.length) {
                                         return (
-                                          <div>
-                                            {(() => {
-                                              return filteredRecords.reduce((previous, current) => {
-                                                return previous + current.price
-                                              }, 0)
-                                            })()}
+                                          <ExposeADay>
+                                            <span>
+                                              {(() => {
+                                                return filteredRecords.reduce((previous, current) => {
+                                                  return previous + current.price
+                                                }, 0)
+                                              })()}
+                                            </span>{' '}
                                             円
-                                          </div>
+                                          </ExposeADay>
                                         )
+                                      } else {
+                                        return <i className={'fas fa-plus-circle fa-2x'} />
                                       }
                                     })()}
                                   </Link>
@@ -150,8 +159,98 @@ export default class Calendar extends React.Component<Props> {
               })
             })()}
           </tbody>
-        </table>
+        </CalendarTable>
       </div>
     )
   }
 }
+
+const Caption = styled.div`
+  text-align: center;
+  margin-bottom: 20px;
+  span {
+    font-size: 40px;
+    font-weight: bold;
+  }
+`
+const Discription = styled.p`
+  text-align: center;
+  span {
+    font-size: 20px;
+    font-weight: bold;
+  }
+`
+const CalendarTable = styled.table`
+  width: 100%;
+  margin-bottom: 40px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  th,
+  td {
+    text-align: center;
+    width: 14.2857143%;
+    box-sizing: border-box;
+  }
+  th {
+    padding: 10px;
+    font-weight: normal;
+  }
+  td {
+    border: 1px solid #ccc;
+    a {
+      display: block;
+      padding: 10px;
+      height: 70px;
+      position: relative;
+      transition: opacity 0.3s;
+      &:hover {
+        opacity: 0.7;
+      }
+      ${media.sp`
+        height: 50px;
+        padding: 10px 0;
+        text-align: center;
+      `};
+      i {
+        padding-top: 20px;
+        opacity: 0.2;
+        ${media.sp`
+          padding-top: 15px;
+          transform: scale(0.6);
+        `};
+      }
+    }
+  }
+  .sat,
+  .sat a {
+    color: #627aff;
+  }
+  .sun,
+  .sun a,
+  .holiday,
+  .holiday a {
+    color: #ff2043;
+  }
+  .today {
+    background: #eee;
+  }
+`
+
+const CalendarDate = styled.div`
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 14px;
+  ${media.sp`font-size: 12px;`};
+`
+
+const ExposeADay = styled.div`
+  padding-top: 24px;
+  color: #767676;
+  ${media.sp`font-size: 8px;`};
+  span {
+    font-weight: bold;
+    font-size: 20px;
+    ${media.sp`font-size: 11px;`};
+  }
+`

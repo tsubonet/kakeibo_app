@@ -3,6 +3,7 @@ import Link from '../components/link'
 import Calendar from '../components/calendar'
 import Charts from '../components/charts'
 import { Date, Record } from '../types/index'
+import styled from 'styled-components'
 
 interface Props {
   date: Date
@@ -35,7 +36,7 @@ export default class PageMonth extends React.Component<Props> {
     const { date } = this.props
     return (
       <div>
-        <nav>
+        <Nav>
           <ul>
             <li>
               <Link href={this.prevCalendar()} data-link="prev">
@@ -54,10 +55,16 @@ export default class PageMonth extends React.Component<Props> {
               <Link href={`/year/${date.year}`}>{date.year}年一覧</Link>
             </li>
           </ul>
-        </nav>
+        </Nav>
         <Calendar {...this.props} />
         <Charts {...this.props} />
       </div>
     )
   }
 }
+
+const Nav = styled.nav`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+`

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { css, keyframes } from 'styled-components'
 
 function getHoliday(h) {
   var g = [
@@ -230,4 +231,22 @@ const sendDelete = url => {
     .then(response => response.data)
 }
 
-export { getHoliday, sendGet, sendPost, sendPatch, sendDelete }
+const media = {
+  // pc: (...args) => css`
+  //  @media (min-width: 992px) {
+  //    ${css(...args)};
+  //  }
+  //`,
+  // tablet: (...args) => css`
+  //   @media (min-width: 768px) {
+  //     ${ css(...args) }
+  //   }
+  // `,
+  sp: (...args) => css`
+    @media (max-width: 640px) {
+      ${css(...args)};
+    }
+  `,
+}
+
+export { getHoliday, sendGet, sendPost, sendPatch, sendDelete, media }

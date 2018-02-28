@@ -1,0 +1,11 @@
+body {
+  color: #767676;
+  @media (max-width: 640px) {
+    font-size: 14px;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #767676;
+}

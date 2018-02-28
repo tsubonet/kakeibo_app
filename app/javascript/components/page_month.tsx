@@ -36,26 +36,30 @@ export default class PageMonth extends React.Component<Props> {
     const { date } = this.props
     return (
       <div>
-        <Nav>
-          <ul>
+        <nav>
+          <ControllNav>
             <li>
-              <Link href={this.prevCalendar()} data-link="prev">
-                <i className="fas fa-angle-left fa-2x" />prev
+              <Link href={this.prevCalendar()}>
+                <i className="fas fa-angle-left fa-2x" />
               </Link>
             </li>
             <li>
-              <Link href={this.nextCalendar()} data-link="next">
-                <i className="fas fa-angle-right fa-2x" />next
+              <Link href={this.nextCalendar()}>
+                <i className="fas fa-angle-right fa-2x" />
               </Link>
             </li>
             <li>
-              <Link href="/">今月</Link>
+              <Link href="/" data-type="btn">
+                今月
+              </Link>
             </li>
             <li>
-              <Link href={`/year/${date.year}`}>{date.year}年一覧</Link>
+              <Link href={`/year/${date.year}`} data-type="btn">
+                {date.year}年一覧
+              </Link>
             </li>
-          </ul>
-        </Nav>
+          </ControllNav>
+        </nav>
         <Calendar {...this.props} />
         <Charts {...this.props} />
       </div>
@@ -63,8 +67,21 @@ export default class PageMonth extends React.Component<Props> {
   }
 }
 
-const Nav = styled.nav`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
+const ControllNav = styled.ul`
+  padding: 0;
+  text-align: right;
+  li {
+    list-style: none;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20px;
+    a[data-type='btn'] {
+      background: #f5f5f5;
+      padding: 10px 10px;
+      transition: background 0.3s;
+      &:hover {
+        background: #ccc;
+      }
+    }
+  }
 `

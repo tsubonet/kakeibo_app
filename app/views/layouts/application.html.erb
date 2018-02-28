@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Kakeibo</title>
+    <title>かんたんな家計簿</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="robots" content="noindex">
     <%= csrf_meta_tags %>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.2/css/all.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <%= yield %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'main' %>
   </body>
 </html>

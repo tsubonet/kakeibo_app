@@ -2,6 +2,8 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import Link from '../components/link'
+import { media } from '../utils'
+import styled from 'styled-components'
 
 import PageYearContainer from '../containers/page_year_container'
 import PageMonthContainer from '../containers/page_month_container'
@@ -47,17 +49,31 @@ export default class Router extends React.Component<Props> {
 
   render() {
     return (
-      <div>
-        <div>
+      <Wrap>
+        <Logo>
           <Link href="/">かんたんな家計簿</Link>
-        </div>
+        </Logo>
         <Switch>
           <Route exact path="/" component={PageMonthContainer} />
           <Route exact path="/month/:year/:month" component={PageMonthContainer} />
           <Route exact path="/day/:year/:month/:day" component={PageDayContainer} />
           <Route exact path="/year/:year/" component={PageYearContainer} />
         </Switch>
-      </div>
+      </Wrap>
     )
   }
 }
+
+const Wrap = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 10px 40px;
+`
+const Logo = styled.div`
+  margin: 20px 0 20px;
+  ${media.sp`
+    text-align: center;
+    margin-bottom: 30px;
+  `}
+}
+`

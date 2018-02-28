@@ -72,6 +72,7 @@ export default class RecordItem extends React.Component<Props, State> {
 }
 
 const Button = styled.a`
+  display: inline-block;
   ${media.pc`
     &:first-child {margin-right: 10px;}
   `};

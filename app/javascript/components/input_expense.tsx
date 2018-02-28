@@ -120,7 +120,8 @@ export default class InputExpense extends React.Component<Props, State> {
 const SelectSortWrapper = styled.div`
   width: 100px;
   position: relative;
-  ::before {
+  background: #fff;
+  &::before {
     position: absolute;
     content: '';
     display: block;

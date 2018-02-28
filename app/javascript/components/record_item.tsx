@@ -1,6 +1,6 @@
 import * as React from 'react'
+import InputExpense from '../components/input_expense'
 import { Record } from '../types/index'
-import InputExpense from './input_expense'
 import styled from 'styled-components'
 import { media } from '../utils'
 

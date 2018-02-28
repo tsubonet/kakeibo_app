@@ -1,8 +1,9 @@
 import * as React from 'react'
 import Link from '../components/link'
 import RecordItem from '../components/record_item'
+import Charts from '../components/charts'
+import InputExpense from '../components/input_expense'
 import { Date, Record } from '../types/index'
-import InputExpense from './input_expense'
 import styled from 'styled-components'
 import { media } from '../utils'
 
@@ -86,6 +87,7 @@ export default class PageDay extends React.Component<Props> {
             <InputExpense sort="食費" price={0} onCreate={this.onCreate} />
           </tbody>
         </ExpenseDetail>
+        <Charts records={records} />
         <Link href={`/month/${date.year}/${date.month}`}>
           <i className="fas fa-angle-left" /> カレンダーにもどる
         </Link>

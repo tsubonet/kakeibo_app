@@ -1,3 +1,14 @@
+#################################
+if ENV.fetch("RAILS_ENV") == 'production'
+  _proj_path = "#{File.expand_path("../..", __FILE__)}"
+  _proj_name = File.basename(_proj_path)
+  _home = ENV.fetch("HOME") { "/home/tsubonet" }
+
+  pidfile "#{_home}/run/#{_proj_name}.pid"
+  bind "unix://#{_home}/run/#{_proj_name}.sock"
+  directory _proj_path
+end
+#################################
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
@@ -9,7 +20,7 @@ threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-port        ENV.fetch("PORT") { 3000 }
+port        ENV.fetch("PORT") { 3002 }
 
 # Specifies the `environment` that Puma will run in.
 #

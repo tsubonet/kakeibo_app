@@ -5,14 +5,14 @@ import { media } from '../utils'
 
 interface Props {
   sort: string
-  price: number
+  price?: number | string
   action?: string
   onUpdate?(data: any): void
   onCreate?(data: any): void
 }
 interface State {
   sort: string
-  price: number
+  price?: number | string
   sortCustom: string
 }
 
@@ -41,7 +41,7 @@ export default class InputExpense extends React.Component<Props, State> {
     onCreate(data)
     this.setState({
       sort: '食費',
-      price: 0,
+      price: '',
     })
   }
 
@@ -148,16 +148,19 @@ const SelectSort = styled.select`
   border-radius: 3px;
   padding: 10px 30px 10px 10px;
   width: 100%;
+  font-size: 16px;
 `
 const InputSortCustom = styled.input`
   width: 100%;
   margin-top: 10px;
   padding: 10px;
   box-sizing: border-box;
+  font-size: 16px;
 `
 const InputPrice = styled.input`
   padding: 10px;
   box-sizing: border-box;
+  font-size: 16px;
   ${media.pc`width: 100px;`};
   ${media.sp`width: 78%;`};
 `

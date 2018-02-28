@@ -84,7 +84,7 @@ export default class PageDay extends React.Component<Props> {
                 })
               }
             })()}
-            <InputExpense sort="食費" price={0} onCreate={this.onCreate} />
+            <InputExpense sort="食費" price="" onCreate={this.onCreate} />
           </tbody>
         </ExpenseDetail>
         <Charts records={records} />

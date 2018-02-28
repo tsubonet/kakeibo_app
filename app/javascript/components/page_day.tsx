@@ -3,6 +3,8 @@ import Link from '../components/link'
 import RecordItem from '../components/record_item'
 import { Date, Record } from '../types/index'
 import InputExpense from './input_expense'
+import styled from 'styled-components'
+import { media } from '../utils'
 
 interface Props {
   date: Date
@@ -39,23 +41,23 @@ export default class PageDay extends React.Component<Props> {
     const { date, records, deleteRecord, patchRecord } = this.props
     return (
       <div>
-        <p>
-          {date.year}年{date.month}月{date.day}日({this.getDay()})
-        </p>
-        <dl>
-          <dt>
-            <i className="fas fa-hand-point-down" /> この日の出費は...
-          </dt>
+        <Caption>
+          {date.year}年<span>{date.month}</span>月<span>{date.day}</span>日({this.getDay()})
+        </Caption>
+        <ExpenseResult>
+          <dt>この日の支出は...</dt>
           <dd>
             {(() => {
               if (records.length) {
                 return (
                   <div>
-                    {(() => {
-                      return records.reduce((previous, current) => {
-                        return previous + current.price
-                      }, 0)
-                    })()}
+                    <span>
+                      {(() => {
+                        return records.reduce((previous, current) => {
+                          return previous + current.price
+                        }, 0)
+                      })()}
+                    </span>{' '}
                     円
                   </div>
                 )
@@ -64,8 +66,8 @@ export default class PageDay extends React.Component<Props> {
               }
             })()}
           </dd>
-        </dl>
-        <table>
+        </ExpenseResult>
+        <ExpenseDetail>
           <thead>
             <tr>
               <th>項目</th>
@@ -83,7 +85,7 @@ export default class PageDay extends React.Component<Props> {
             })()}
             <InputExpense sort="食費" price={0} onCreate={this.onCreate} />
           </tbody>
-        </table>
+        </ExpenseDetail>
         <Link href={`/month/${date.year}/${date.month}`}>
           <i className="fas fa-angle-left" /> カレンダーにもどる
         </Link>
@@ -91,3 +93,53 @@ export default class PageDay extends React.Component<Props> {
     )
   }
 }
+
+const Caption = styled.p`
+  text-align: center;
+  margin-bottom: 20px;
+  span {
+    font-size: 24px;
+    font-weight: bold;
+    ${media.sp`font-size: 20px;`};
+  }
+`
+const ExpenseResult = styled.dl`
+  text-align: center;
+  dt {
+    margin-bottom: 10px;
+  }
+  dd {
+    margin: 0;
+  }
+  span {
+    font-size: 40px;
+    font-weight: bold;
+    ${media.sp`font-size: 30px;`};
+  }
+`
+const ExpenseDetail = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+  margin-bottom: 40px;
+  th,
+  td {
+    text-align: center;
+    width: 14.2857143%;
+    box-sizing: border-box;
+  }
+  th {
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 4px solid #ccc;
+  }
+  tr:nth-child(even) td {
+    background: #f5f5f5;
+  }
+  tr:nth-child(odd) td {
+    background: #fdfdfd;
+  }
+  td {
+    padding: 20px 10px;
+  }
+`

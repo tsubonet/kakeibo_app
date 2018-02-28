@@ -1,5 +1,7 @@
 import * as React from 'react'
 import { Record } from '../types/index'
+import styled from 'styled-components'
+import { media } from '../utils'
 
 interface Props {
   sort: string

@@ -76,7 +76,7 @@ export default class Calendar extends React.Component<Props> {
       <div>
         <Caption>
           <Link href={`/month/${date.year}/${date.month}`}>
-            {date.year}年<span>{date.month}</span>月
+            {date.year}年 <span>{date.month}</span> 月
           </Link>
         </Caption>
         {(() => {
@@ -171,6 +171,7 @@ const Caption = styled.div`
   span {
     font-size: 40px;
     font-weight: bold;
+    ${media.sp`font-size: 30px;`};
   }
 `
 const Discription = styled.p`
@@ -178,6 +179,7 @@ const Discription = styled.p`
   span {
     font-size: 20px;
     font-weight: bold;
+    ${media.sp`font-size: 18px;`};
   }
 `
 const CalendarTable = styled.table`
@@ -235,7 +237,6 @@ const CalendarTable = styled.table`
     background: #eee;
   }
 `
-
 const CalendarDate = styled.div`
   position: absolute;
   top: 5px;
@@ -243,7 +244,6 @@ const CalendarDate = styled.div`
   font-size: 14px;
   ${media.sp`font-size: 12px;`};
 `
-
 const ExposeADay = styled.div`
   padding-top: 24px;
   color: #767676;

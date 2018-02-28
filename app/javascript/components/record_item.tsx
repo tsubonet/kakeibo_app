@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { Record } from '../types/index'
 import InputExpense from './input_expense'
+import styled from 'styled-components'
+import { media } from '../utils'
 
 interface Props {
   record: Record

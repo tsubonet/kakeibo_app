@@ -50,5 +50,9 @@ test:
 production:
   <<: *default
   database: kakeibo_production
-  username: kakeibo
-  password: <%= ENV['KAKEIBO_DATABASE_PASSWORD'] %>
+  pool: 5
+  timeout: 5000
+  username: root
+  password: MyNewPass4!
+  host: localhost
+  

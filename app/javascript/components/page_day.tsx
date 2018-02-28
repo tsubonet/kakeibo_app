@@ -124,8 +124,7 @@ const ExpenseDetail = styled.table`
   margin-bottom: 40px;
   th,
   td {
-    text-align: center;
-    width: 14.2857143%;
+    text-align: left;
     box-sizing: border-box;
   }
   th {
@@ -133,13 +132,13 @@ const ExpenseDetail = styled.table`
     font-weight: bold;
     border-bottom: 4px solid #ccc;
   }
+  td {
+    padding: 20px 10px;
+  }
   tr:nth-child(even) td {
     background: #f5f5f5;
   }
   tr:nth-child(odd) td {
     background: #fdfdfd;
-  }
-  td {
-    padding: 20px 10px;
   }
 `

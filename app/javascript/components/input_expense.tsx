@@ -62,48 +62,53 @@ export default class InputExpense extends React.Component<Props, State> {
     return (
       <tr>
         <td>
-          <select
-            value={sort}
-            onChange={e => {
-              this.setState({ sort: e.target.value })
-            }}
-          >
-            <option value="食費">食費</option>
-            <option value="外食費">外食費</option>
-            <option value="雑費">雑費</option>
-            <option value="子供関係">子供関係</option>
-            <option value="その他">その他</option>
-            <option value="項目を入力する">項目を入力する</option>
-          </select>
+          <SelectSortWrapper>
+            <SelectSort
+              value={sort}
+              onChange={e => {
+                this.setState({ sort: e.target.value })
+              }}
+            >
+              <option value="食費">食費</option>
+              <option value="外食費">外食費</option>
+              <option value="雑費">雑費</option>
+              <option value="子供用品">子供用品</option>
+              <option value="その他">その他</option>
+              <option value="項目を入力する">項目を入力する</option>
+            </SelectSort>
+          </SelectSortWrapper>
           {(() => {
             if (sort === '項目を入力する') {
               return (
-                <input
-                  type="text"
-                  value={sortCustom}
-                  onChange={e => {
-                    this.setState({ sortCustom: e.target.value })
-                  }}
-                />
+                <div>
+                  <InputSortCustom
+                    type="text"
+                    value={sortCustom}
+                    onChange={e => {
+                      this.setState({ sortCustom: e.target.value })
+                    }}
+                  />
+                </div>
               )
             }
           })()}
         </td>
         <td>
-          <input
+          <InputPrice
             type="number"
             value={price}
             onChange={e => {
               this.setState({ price: parseInt(e.target.value) })
             }}
-          />円
+          />{' '}
+          円
         </td>
         <td>
           {(() => {
             if (action === 'update') {
-              return <button onClick={this.handleUpdate}>更新</button>
+              return <Button onClick={this.handleUpdate}>更新</Button>
             } else {
-              return <button onClick={this.handleCreate}>登録</button>
+              return <Button onClick={this.handleCreate}>登録</Button>
             }
           })()}
         </td>
@@ -111,3 +116,46 @@ export default class InputExpense extends React.Component<Props, State> {
     )
   }
 }
+
+const SelectSortWrapper = styled.div`
+  width: 100px;
+  position: relative;
+  ::before {
+    position: absolute;
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-bottom: 3px solid #ccc;
+    border-left: 3px solid #ccc;
+    transform: rotate(-45deg);
+    z-index: 1;
+    right: 10px;
+    top: 14px;
+  }
+`
+const SelectSort = styled.select`
+  -webkit-appearance: none;
+  background: transparent;
+  position: relative;
+  z-index: 2;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 10px 30px 10px 10px;
+  width: 100px;
+`
+const InputSortCustom = styled.input`
+  margin-top: 10px;
+  padding: 10px;
+`
+const InputPrice = styled.input`
+  padding: 10px;
+  width: 100px;
+  box-sizing: border-box;
+`
+const Button = styled.button`
+  padding: 10px 20px;
+  background: none;
+  border-radius: 3px;
+  background: rgba(191, 255, 182, 0.3);
+`

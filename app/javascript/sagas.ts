@@ -3,7 +3,7 @@ import { getRecord, postRecord, patchRecord, deleteRecord, loadingStart, loading
 
 function* handleFetchPootProps(action) {
   try {
-    loadingStart()
+    yield call(loadingStart)
     const { date, records, recordsYear } = yield call(getRecord, action.payload.url)
     yield put({ type: 'GET_DATE', date })
     if (typeof records !== 'undefined') {
@@ -15,32 +15,38 @@ function* handleFetchPootProps(action) {
     if (action.payload.pushState) {
       action.payload.callback()
     }
-    loadingEnd()
+    yield call(loadingEnd)
     window.scrollTo(0, 0)
   } catch (e) {
-    loadingEnd()
+    yield call(loadingEnd)
   }
 }
 
 function* handlePostRecord(action) {
-  const { status, record } = yield call(postRecord, action.payload.data)
+  yield call(loadingStart)
+  const { status, record, txt } = yield call(postRecord, action.payload.data)
   if (status === 'success') {
     yield put({ type: 'POST_RECORD', record })
   }
+  yield call(loadingEnd)
 }
 
 function* handlePatchRecord(action) {
-  const { status, record } = yield call(patchRecord, action.payload.record, action.payload.data)
+  yield call(loadingStart)
+  const { status, record, txt } = yield call(patchRecord, action.payload.record, action.payload.data)
   if (status === 'success') {
     yield put({ type: 'PATCH_RECORD', record })
   }
+  yield call(loadingEnd)
 }
 
 function* handleDeleteRecord(action) {
-  const { status, record } = yield call(deleteRecord, action.payload.record)
+  yield call(loadingStart)
+  const { status, record, txt } = yield call(deleteRecord, action.payload.record)
   if (status === 'success') {
     yield put({ type: 'DELETE_RECORD', record })
   }
+  yield call(loadingEnd)
 }
 
 function* mySaga() {

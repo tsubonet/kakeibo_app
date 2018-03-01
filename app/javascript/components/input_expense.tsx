@@ -34,6 +34,10 @@ export default class InputExpense extends React.Component<Props, State> {
     const { onCreate } = this.props
     const { sort, sortCustom, price } = this.state
     const tempSort = sort === '項目を入力する' ? sortCustom : sort
+    if (tempSort === '' || price === '' || price === NaN) {
+      confirm('未入力の項目があります。')
+      return
+    }
     const data = {
       sort: tempSort,
       price,
@@ -50,6 +54,10 @@ export default class InputExpense extends React.Component<Props, State> {
     const { onUpdate } = this.props
     const { sort, sortCustom, price } = this.state
     const tempSort = sort === '項目を入力する' ? sortCustom : sort
+    if (tempSort === '' || price === '' || price === NaN) {
+      confirm('未入力の項目があります。')
+      return
+    }
     const data = {
       sort: tempSort,
       price,
@@ -87,7 +95,9 @@ export default class InputExpense extends React.Component<Props, State> {
                     placeholder="項目を入力"
                     value={sortCustom}
                     innerRef={(input: HTMLInputElement) => {
-                      return input && input.focus()
+                      if (window.window.matchMedia('screen and (min-width: 768px)')) {
+                        return input && input.focus()
+                      }
                     }}
                     onChange={e => {
                       this.setState({ sortCustom: e.target.value })
@@ -101,6 +111,7 @@ export default class InputExpense extends React.Component<Props, State> {
         <td>
           <InputPrice
             type="number"
+            placeholder="1000"
             value={price}
             onChange={e => {
               this.setState({ price: parseInt(e.target.value) })

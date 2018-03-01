@@ -159,7 +159,9 @@ const SelectSort = styled.select`
   border-radius: 3px;
   padding: 10px 30px 10px 10px;
   width: 100%;
+  height: 40px;
   font-size: 16px;
+  box-sizing: border-box;
 `
 const InputSortCustom = styled.input`
   width: 100%;
@@ -167,11 +169,14 @@ const InputSortCustom = styled.input`
   padding: 10px;
   box-sizing: border-box;
   font-size: 16px;
+  border: 1px solid #ccc;
 `
 const InputPrice = styled.input`
   padding: 10px;
   box-sizing: border-box;
   font-size: 16px;
+  border: 1px solid #ccc;
+  height: 40px;
   ${media.pc`width: 100px;`};
   ${media.sp`width: 78%;`};
 `

@@ -11,8 +11,6 @@ interface Props {
 }
 interface State {
   isEdit: boolean
-  sort: string
-  price: number
 }
 
 export default class RecordItem extends React.Component<Props, State> {
@@ -20,8 +18,6 @@ export default class RecordItem extends React.Component<Props, State> {
     super(props)
     this.state = {
       isEdit: false,
-      sort: props.record.sort,
-      price: props.record.price,
     }
     this.handleDelete = this.handleDelete.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this)
@@ -43,20 +39,19 @@ export default class RecordItem extends React.Component<Props, State> {
     onUpdate(record, data)
     this.setState({
       isEdit: false,
-      sort: data.sort,
-      price: data.price,
     })
   }
 
   render() {
-    const { isEdit, sort, price } = this.state
+    const { isEdit } = this.state
+    const { record } = this.props
     if (isEdit) {
-      return <InputExpense action="update" sort={sort} price={price} onUpdate={this.handleUpdate} />
+      return <InputExpense record={record} onUpdate={this.handleUpdate} />
     } else {
       return (
         <tr>
-          <td>{sort}</td>
-          <td>{price}円</td>
+          <td>{record.sort}</td>
+          <td>{record.price}円</td>
           <td>
             <Button onClick={this.handleEdit}>
               <i className="fas fa-edit fa-2x" />

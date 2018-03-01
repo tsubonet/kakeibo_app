@@ -4,9 +4,7 @@ import styled from 'styled-components'
 import { media } from '../utils'
 
 interface Props {
-  sort: string
-  price?: number | string
-  action?: string
+  record?: Record
   onUpdate?(data: any): void
   onCreate?(data: any): void
 }
@@ -21,8 +19,8 @@ export default class InputExpense extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
-      sort: props.sort,
-      price: props.price,
+      sort: typeof props.record !== 'undefined' ? props.record.sort : '食事',
+      price: typeof props.record !== 'undefined' ? props.record.price : '',
       sortCustom: '',
     }
     this.handleUpdate = this.handleUpdate.bind(this)
@@ -66,7 +64,7 @@ export default class InputExpense extends React.Component<Props, State> {
   }
 
   render() {
-    const { action } = this.props
+    const { record } = this.props
     const { sort, price, sortCustom } = this.state
     return (
       <tr>
@@ -111,7 +109,7 @@ export default class InputExpense extends React.Component<Props, State> {
         <td>
           <InputPrice
             type="number"
-            placeholder="1000"
+            placeholder="例)100"
             value={price}
             onChange={e => {
               this.setState({ price: parseInt(e.target.value) })
@@ -121,7 +119,7 @@ export default class InputExpense extends React.Component<Props, State> {
         </td>
         <td>
           {(() => {
-            if (action === 'update') {
+            if (typeof record !== 'undefined') {
               return <Button onClick={this.handleUpdate}>更新</Button>
             } else {
               return <Button onClick={this.handleCreate}>登録</Button>

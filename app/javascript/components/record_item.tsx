@@ -1,13 +1,13 @@
 import * as React from 'react'
 import InputExpense from '../components/input_expense'
-import { Record } from '../types/index'
+import { Record, RecordData } from '../types/index'
 import styled from 'styled-components'
 import { media } from '../utils'
 
 interface Props {
   record: Record
   onDelete(record: Record): void
-  onUpdate(record: Record, data: any): void
+  onUpdate(record: Record, data: RecordData): void
 }
 interface State {
   isEdit: boolean
@@ -34,7 +34,7 @@ export default class RecordItem extends React.Component<Props, State> {
     onDelete(record)
   }
 
-  handleUpdate(data) {
+  handleUpdate(data: RecordData) {
     const { record, onUpdate } = this.props
     onUpdate(record, data)
     this.setState({

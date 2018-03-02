@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { postRecord, patchRecord, deleteRecord } from '../actions/records'
 import PageDay from '../components/page_day'
-import { StoreState } from '../types/index'
+import { StoreState, Record, RecordData } from '../types/index'
 
 const mapStateToProps = ({ date, records }: StoreState) => {
   return {
@@ -12,13 +12,13 @@ const mapStateToProps = ({ date, records }: StoreState) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postRecord: data => {
+    postRecord: (data: Record) => {
       dispatch(postRecord(data))
     },
-    patchRecord: (record, data) => {
+    patchRecord: (record: Record, data: Record) => {
       dispatch(patchRecord(record, data))
     },
-    deleteRecord: record => {
+    deleteRecord: (record: Record) => {
       dispatch(deleteRecord(record))
     },
   }

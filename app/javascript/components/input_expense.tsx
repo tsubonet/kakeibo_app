@@ -1,12 +1,12 @@
 import * as React from 'react'
-import { Record } from '../types/index'
+import { Record, RecordData } from '../types/index'
 import styled from 'styled-components'
 import { media } from '../utils'
 
 interface Props {
   record?: Record
-  onUpdate?(data: any): void
-  onCreate?(data: any): void
+  onUpdate?(data: RecordData): void
+  onCreate?(data: RecordData): void
 }
 interface State {
   sort: string

@@ -3,15 +3,15 @@ import Link from '../components/link'
 import RecordItem from '../components/record_item'
 import Charts from '../components/charts'
 import InputExpense from '../components/input_expense'
-import { Date, Record } from '../types/index'
+import { Date, Record, RecordData } from '../types/index'
 import styled from 'styled-components'
 import { media } from '../utils'
 
 interface Props {
   date: Date
   records: Record[]
-  postRecord(data: any): void
-  patchRecord(record: Record, data: any): void
+  postRecord(data: RecordData): void
+  patchRecord(record: Record, data: RecordData): void
   deleteRecord(record: Record): void
 }
 
@@ -21,7 +21,7 @@ export default class PageDay extends React.Component<Props> {
     this.onCreate = this.onCreate.bind(this)
   }
 
-  onCreate(data) {
+  onCreate(data: RecordData) {
     const { date, postRecord } = this.props
     const _data = {
       ...data,

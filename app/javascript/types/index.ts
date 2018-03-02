@@ -11,6 +11,12 @@ export interface Record {
   done_on: string
 }
 
+export interface RecordData {
+  sort?: string
+  price?: number | string
+  done_on?: string
+}
+
 export interface StoreState {
   date: Date
   records: Record[]

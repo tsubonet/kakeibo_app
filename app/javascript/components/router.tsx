@@ -10,8 +10,8 @@ import PageMonthContainer from '../containers/page_month_container'
 import PageDayContainer from '../containers/page_day_container'
 
 interface Props {
-  transitTo(url: string, { pushState }): void
-  transitTo(url: string, { pushState }, callback): void
+  transitTo(url: string, { pushState }: { pushState: boolean }): void
+  transitTo(url: string, { pushState }: { pushState: boolean }, callback: object): void
   history: any
 }
 export default class Router extends React.Component<Props> {

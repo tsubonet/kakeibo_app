@@ -37,6 +37,12 @@ gem 'mini_racer', platforms: :ruby
 gem "react_on_rails", "10.0.2"
 gem "webpacker", "~> 3.0"
 gem "foreman"
+# トークンベースの認証を行うためのgem
+gem 'devise'
+gem 'devise_token_auth'
+# クロスドメイン対策
+gem 'rack-cors'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

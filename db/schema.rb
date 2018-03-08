@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 20180308031646) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "name"
-    t.string "nickname"
     t.string "email"
     t.text "tokens"
     t.datetime "created_at", null: false

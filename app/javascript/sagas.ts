@@ -49,11 +49,17 @@ function* handleDeleteRecord(action) {
   yield call(loadingEnd)
 }
 
+function* handleAuthenticate() {}
+function* handleSignOut() {}
+
 function* mySaga() {
   yield takeLatest('FETCH_ROOT_RROPS_REQUESTED', handleFetchPootProps)
   yield takeLatest('POST_RECORD_REQUESTED', handlePostRecord)
   yield takeLatest('PATCH_RECORD_REQUESTED', handlePatchRecord)
   yield takeLatest('DELETE_RECORD_REQUESTED', handleDeleteRecord)
+
+  yield takeLatest('AUTHENTICATE_REQUESTED', handleAuthenticate)
+  yield takeLatest('SIGNOUT_REQUESTED', handleSignOut)
 }
 
 export default mySaga

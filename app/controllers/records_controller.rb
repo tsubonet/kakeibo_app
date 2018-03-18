@@ -7,16 +7,15 @@ class RecordsController < ApplicationController
       if record.save
         response_data = {
           record: record,
-          status: 'success',
           txt: ['投稿しました！'],
         }
+        render json: response_data, status: :created
       else
         response_data = {
-          status: 'error',
           txt: record.errors.full_messages,
         }
+        render json: response_data, status: :unprocessable_entity
       end
-      render json: response_data
     end
   
     # PATCH /records/1
@@ -26,16 +25,15 @@ class RecordsController < ApplicationController
       if record.update(record_params)
         response_data = {
           record: record,
-          status: 'success',
-          txt: ['投稿しました！'],
+          txt: ['更新しました！'],
         }
+        render json: response_data, status: :ok
       else
         response_data = {
-          status: 'error',
           txt: record.errors.full_messages,
         }
+        render json: response_data, status: :unprocessable_entity
       end
-      render json: response_data
     end
   
     # DELETE /records/1
@@ -44,11 +42,14 @@ class RecordsController < ApplicationController
       record = Record.find(params[:id])
       if record.destroy
         response_data = {
-          record: record,
-          status: 'success',
           txt: ['削除しました！'],
         }
         render json: response_data, status: :ok
+      else
+        response_data = {
+          txt: ['削除できませんでした！'],
+        }
+        render json: response_data, status: :unprocessable_entity
       end
     end
   

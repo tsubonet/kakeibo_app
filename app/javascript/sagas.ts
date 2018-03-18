@@ -24,8 +24,8 @@ function* handleFetchPootProps(action) {
 
 function* handlePostRecord(action) {
   yield call(loadingStart)
-  const { status, record, txt } = yield call(postRecord, action.payload.data)
-  if (status === 'success') {
+  const { status, record } = yield call(postRecord, action.payload.data)
+  if (status === 201) {
     yield put({ type: 'POST_RECORD', record })
   }
   yield call(loadingEnd)
@@ -33,8 +33,8 @@ function* handlePostRecord(action) {
 
 function* handlePatchRecord(action) {
   yield call(loadingStart)
-  const { status, record, txt } = yield call(patchRecord, action.payload.record, action.payload.data)
-  if (status === 'success') {
+  const { status, record } = yield call(patchRecord, action.payload.record, action.payload.data)
+  if (status === 200) {
     yield put({ type: 'PATCH_RECORD', record })
   }
   yield call(loadingEnd)
@@ -42,18 +42,24 @@ function* handlePatchRecord(action) {
 
 function* handleDeleteRecord(action) {
   yield call(loadingStart)
-  const { status, record, txt } = yield call(deleteRecord, action.payload.record)
-  if (status === 'success') {
-    yield put({ type: 'DELETE_RECORD', record })
+  const { status } = yield call(deleteRecord, action.payload.record)
+  if (status === 200) {
+    yield put({ type: 'DELETE_RECORD', record: action.payload.record })
   }
   yield call(loadingEnd)
 }
+
+function* handleAuthenticate() {}
+function* handleSignOut() {}
 
 function* mySaga() {
   yield takeLatest('FETCH_ROOT_RROPS_REQUESTED', handleFetchPootProps)
   yield takeLatest('POST_RECORD_REQUESTED', handlePostRecord)
   yield takeLatest('PATCH_RECORD_REQUESTED', handlePatchRecord)
   yield takeLatest('DELETE_RECORD_REQUESTED', handleDeleteRecord)
+
+  yield takeLatest('AUTHENTICATE_REQUESTED', handleAuthenticate)
+  yield takeLatest('SIGNOUT_REQUESTED', handleSignOut)
 }
 
 export default mySaga

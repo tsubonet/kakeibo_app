@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get 'year/:year'            => 'calendar#year'
   get 'day/:year/:month/:day' => 'calendar#day'
 
+  get '/signup' => 'home#index'
+
   resources :records
 
 end

@@ -5,10 +5,12 @@ import Link from '../components/link'
 import { media } from '../utils'
 import styled from 'styled-components'
 
-import Signup from '../containers/signup'
 import PageYearContainer from '../containers/page_year_container'
 import PageMonthContainer from '../containers/page_month_container'
 import PageDayContainer from '../containers/page_day_container'
+
+import Signup from '../auth/signup'
+import Login from '../auth/login'
 
 interface Props {
   transitTo(url: string, { pushState }: { pushState: boolean }): void
@@ -55,8 +57,10 @@ export default class Router extends React.Component<Props> {
           <Link href="/">かんたんな家計簿</Link>
         </Logo>
         <Link href="/signup">Sign up</Link>
+        <Link href="/login">Log in</Link>
 
         <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
         <Switch>
           <Route exact path="/" component={PageMonthContainer} />
           <Route exact path="/month/:year/:month" component={PageMonthContainer} />

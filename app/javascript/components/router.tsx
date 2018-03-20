@@ -9,6 +9,7 @@ import PageYearContainer from '../containers/page_year_container'
 import PageMonthContainer from '../containers/page_month_container'
 import PageDayContainer from '../containers/page_day_container'
 
+import GlobalNav from '../auth/globalNav'
 import Signup from '../auth/signup'
 import Login from '../auth/login'
 
@@ -56,8 +57,7 @@ export default class Router extends React.Component<Props> {
         <Logo>
           <Link href="/">かんたんな家計簿</Link>
         </Logo>
-        <Link href="/signup">Sign up</Link>
-        <Link href="/login">Log in</Link>
+        <GlobalNav />
 
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />

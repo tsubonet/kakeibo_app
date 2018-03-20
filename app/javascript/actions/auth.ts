@@ -8,8 +8,11 @@ export function authenticate(email, password) {
   }
 }
 
-export function signout() {
+export function signout(auth) {
   return {
     type: 'SIGNOUT_REQUESTED',
+    payload: {
+      auth,
+    },
   }
 }

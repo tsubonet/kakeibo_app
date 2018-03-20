@@ -72,7 +72,11 @@ function* handleAuthenticate(action) {
   }
 }
 function* handleSignOut(action) {
-  //const { status, uid, client, accessToken, expiry } = yield call(signout)
+  const { status } = yield call(signout, action.payload.auth)
+  console.log(status)
+  if (status === 200) {
+    yield put({ type: 'AUTH_SIGNOUT' })
+  }
 }
 
 function* mySaga() {

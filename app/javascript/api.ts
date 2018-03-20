@@ -66,6 +66,6 @@ export const signout = auth => {
         uid: auth.uid,
       },
     })
-    .then(response => {})
-    .catch(error => {})
+    .then(response => response)
+    .catch(error => error.response)
 }

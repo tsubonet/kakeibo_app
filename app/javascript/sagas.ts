@@ -5,7 +5,9 @@ function* handleFetchPootProps(action) {
   try {
     yield call(loadingStart)
     const { date, records, recordsYear } = yield call(getRecord, action.payload.url)
-    yield put({ type: 'GET_DATE', date })
+    if (typeof date !== 'undefined') {
+      yield put({ type: 'GET_DATE', date })
+    }
     if (typeof records !== 'undefined') {
       yield put({ type: 'GET_RECORDS', records })
     }

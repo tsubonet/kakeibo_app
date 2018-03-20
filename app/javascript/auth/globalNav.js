@@ -14,7 +14,6 @@ class GlobalNav extends React.Component {
     return (
       <div>
         <div>
-          <Link href="/">Home</Link>
           {!isAuthenticated && <Link href="/signup">Signup</Link>}
           {!isAuthenticated && <Link href="/login">Login</Link>}
           {isAuthenticated && (

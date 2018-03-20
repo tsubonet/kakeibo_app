@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import { authenticate } from '../actions/auth'
+import { fetchRootProps } from '../actions/records'
+import { withRouter } from 'react-router'
 
 class Login extends React.Component {
   constructor(props) {
@@ -12,16 +13,19 @@ class Login extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const { isAuthenticated, transitTo, history } = this.props
+    if (isAuthenticated) {
+      transitTo('/', { pushState: true }, () => history.push('/'))
+    }
+  }
+
   handleSubmit() {
     const { email, password } = this.state
     this.props.dispatch(authenticate(email, password))
   }
 
   render() {
-    const { isAuthenticated } = this.props
-    if (isAuthenticated) {
-      return <Redirect to="/" />
-    }
     return (
       <div>
         <h2>Login</h2>
@@ -49,4 +53,12 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Login)
+const mapDispatchToProps = dispatch => {
+  return {
+    transitTo: (url, pushState, callback) => {
+      dispatch(fetchRootProps(url, pushState, callback))
+    },
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))

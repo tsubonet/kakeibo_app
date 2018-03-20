@@ -16,7 +16,7 @@ class Login extends React.Component {
   componentDidMount() {
     const { isAuthenticated, transitTo, history } = this.props
     if (isAuthenticated) {
-      transitTo('/', { pushState: true }, () => history.push('/'))
+      transitTo('/', { pushState: true }, history)
     }
   }
 

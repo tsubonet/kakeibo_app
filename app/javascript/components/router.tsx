@@ -15,8 +15,8 @@ import Login from '../auth/login'
 
 interface Props {
   transitTo(url: string, { pushState }: { pushState: boolean }): void
-  transitTo(url: string, { pushState }: { pushState: boolean }, callback: object): void
-  history: any
+  transitTo(url: string, { pushState }: { pushState: boolean }, history: object): void
+  history: object
 }
 export default class Router extends React.Component<Props> {
   static childContextTypes = {
@@ -47,7 +47,7 @@ export default class Router extends React.Component<Props> {
       const { transitTo, history } = this.props
       const anchorElement = event.currentTarget.pathname ? event.currentTarget : event.currentTarget.querySelector('a')
       const url: string = anchorElement.getAttribute('href')
-      transitTo(url, { pushState: true }, () => history.push(url))
+      transitTo(url, { pushState: true }, history)
     }
   }
 

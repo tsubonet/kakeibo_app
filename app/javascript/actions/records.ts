@@ -6,16 +6,16 @@ export interface fetchRootProps {
   payload: {
     url: string
     pushState: boolean
-    callback: any
+    history: object
   }
 }
-export function fetchRootProps(url, { pushState }, callback): fetchRootProps {
+export function fetchRootProps(url, { pushState }, history): fetchRootProps {
   return {
     type: constants.FETCH_ROOT_RROPS_REQUESTED,
     payload: {
       url,
       pushState,
-      callback,
+      history,
     },
   }
 }

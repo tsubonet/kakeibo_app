@@ -24,7 +24,7 @@ function* handleFetchPootProps(action) {
       yield put({ type: 'GET_RECORDSYEAR', recordsYear })
     }
     if (action.payload.pushState) {
-      action.payload.callback()
+      action.payload.history.push(action.payload.url)
     }
     yield call(loadingEnd)
     window.scrollTo(0, 0)

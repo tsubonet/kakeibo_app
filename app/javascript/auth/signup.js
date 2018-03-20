@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { fetchRootProps } from '../actions/records'
+import { fetchRootProps } from '../actions/common'
 import { withRouter } from 'react-router'
 
 class Signup extends React.Component {
@@ -104,8 +104,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    transitTo: (url, pushState, callback) => {
-      dispatch(fetchRootProps(url, pushState, callback))
+    transitTo: (url, pushState, history) => {
+      dispatch(fetchRootProps(url, pushState, history))
     },
   }
 }

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchRootProps } from '../actions/records'
+import { fetchRootProps } from '../actions/common'
 import Router from '../components/router'
 import { withRouter } from 'react-router'
 

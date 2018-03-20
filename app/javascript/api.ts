@@ -10,10 +10,6 @@ export const loadingEnd = () => {
   return NProgress.done()
 }
 
-export const getRecord = url => {
-  return sendGet(url)
-}
-
 export const postRecord = data => {
   return sendPost('/records', data)
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { authenticate } from '../actions/auth'
-import { fetchRootProps } from '../actions/records'
+import { fetchRootProps } from '../actions/common'
 import { withRouter } from 'react-router'
 
 class Login extends React.Component {
@@ -30,6 +30,12 @@ class Login extends React.Component {
     return (
       <div>
         <h2>Login</h2>
+        {(() => {
+          if (this.props.auth.fail) {
+            return <div>失敗しました</div>
+          }
+        })()}
+
         <p>
           Email: <input type="text" value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
         </p>
@@ -51,13 +57,14 @@ function mapStateToProps(state) {
   return {
     loading,
     isAuthenticated,
+    auth,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    transitTo: (url, pushState, callback) => {
-      dispatch(fetchRootProps(url, pushState, callback))
+    transitTo: (url, pushState, history) => {
+      dispatch(fetchRootProps(url, pushState, history))
     },
     authenticate: (email, password) => {
       dispatch(authenticate(email, password))

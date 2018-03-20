@@ -1,4 +1,5 @@
 import NProgress from 'nprogress'
+import axios from 'axios'
 import { sendGet, sendPost, sendPatch, sendDelete } from './utils'
 
 export const loadingStart = () => {
@@ -23,4 +24,48 @@ export const patchRecord = (record, data) => {
 
 export const deleteRecord = record => {
   return sendDelete(`/records/${record.id}`)
+}
+
+export const authenticate = (email, password) => {
+  return axios
+    .post(
+      `/auth/sign_in`,
+      { email, password },
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+    .then(response => {
+      const status = response.status
+      const uid = response.headers['uid']
+      const client = response.headers['client']
+      const accessToken = response.headers['access-token']
+      const expiry = response.headers['expiry']
+      return {
+        status,
+        uid,
+        client,
+        accessToken,
+        expiry,
+      }
+    })
+    .catch(error => error.response)
+}
+
+export const signout = auth => {
+  return axios
+    .delete('/auth/sign_out', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'access-token': auth.accessToken,
+        client: auth.client,
+        uid: auth.uid,
+      },
+    })
+    .then(response => {})
+    .catch(error => {})
 }

@@ -1,5 +1,14 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import { getRecord, postRecord, patchRecord, deleteRecord, loadingStart, loadingEnd } from './api'
+import {
+  getRecord,
+  postRecord,
+  patchRecord,
+  deleteRecord,
+  loadingStart,
+  loadingEnd,
+  authenticate,
+  signout,
+} from './api'
 
 function* handleFetchPootProps(action) {
   try {
@@ -51,8 +60,20 @@ function* handleDeleteRecord(action) {
   yield call(loadingEnd)
 }
 
-function* handleAuthenticate() {}
-function* handleSignOut() {}
+function* handleAuthenticate(action) {
+  const { status, uid, client, accessToken, expiry } = yield call(
+    authenticate,
+    action.payload.email,
+    action.payload.password
+  )
+  if (status === 200) {
+    yield put({ type: 'AUTH_RECEIVED', uid, client, accessToken, expiry })
+  } else {
+  }
+}
+function* handleSignOut(action) {
+  //const { status, uid, client, accessToken, expiry } = yield call(signout)
+}
 
 function* mySaga() {
   yield takeLatest('FETCH_ROOT_RROPS_REQUESTED', handleFetchPootProps)

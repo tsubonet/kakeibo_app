@@ -61,6 +61,7 @@ function* handleDeleteRecord(action) {
 }
 
 function* handleAuthenticate(action) {
+  yield call(loadingStart)
   const { status, uid, client, accessToken, expiry } = yield call(
     authenticate,
     action.payload.email,
@@ -70,13 +71,17 @@ function* handleAuthenticate(action) {
     yield put({ type: 'AUTH_RECEIVED', uid, client, accessToken, expiry })
   } else {
   }
+  yield call(loadingEnd)
 }
+
 function* handleSignOut(action) {
+  yield call(loadingStart)
   const { status } = yield call(signout, action.payload.auth)
   console.log(status)
   if (status === 200) {
     yield put({ type: 'AUTH_SIGNOUT' })
   }
+  yield call(loadingEnd)
 }
 
 function* mySaga() {

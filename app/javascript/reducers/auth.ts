@@ -9,10 +9,6 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case 'AUTH_REQUEST':
-      return Object.assign({}, state, {
-        loading: true,
-      })
     case 'AUTH_RECEIVED':
       return Object.assign({}, state, {
         loading: false,
@@ -21,10 +17,6 @@ export default function reducer(state = initialState, action) {
         client: action.client,
         accessToken: action.accessToken,
         expiry: action.expiry,
-      })
-    case 'AUTH_FAILED':
-      return Object.assign({}, state, {
-        loading: false,
       })
     case 'AUTH_SIGNOUT':
       return Object.assign({}, initialState)

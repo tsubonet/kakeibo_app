@@ -47,11 +47,10 @@ class Signup extends React.Component {
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/login' } }
     const { name, email, password, passwordConfirmation, redirectToReferrer, errorMessages } = this.state
 
     if (redirectToReferrer) {
-      return <Redirect to={from} />
+      return <Redirect to="/login" />
     }
 
     return (

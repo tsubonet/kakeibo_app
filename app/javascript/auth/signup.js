@@ -59,9 +59,15 @@ class Signup extends React.Component {
 
         {(() => {
           if (errorMessages.length) {
-            return errorMessages.map((message, i) => {
-              return <div key={i}>{message}</div>
-            })
+            return (
+              <div>
+                {(() => {
+                  return errorMessages.map((message, i) => {
+                    return <div key={i}>{message}</div>
+                  })
+                })()}
+              </div>
+            )
           }
         })()}
 

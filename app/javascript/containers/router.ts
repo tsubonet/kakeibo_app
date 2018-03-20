@@ -15,6 +15,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const RouterContainer = connect(mapStateToProps, mapDispatchToProps)(Router)
-
-export default withRouter(RouterContainer)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Router))

@@ -24,6 +24,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const PageDayContainer = connect(mapStateToProps, mapDispatchToProps)(PageDay)
-
-export default PageDayContainer
+export default connect(mapStateToProps, mapDispatchToProps)(PageDay)

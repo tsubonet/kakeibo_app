@@ -5,9 +5,9 @@ import Link from '../components/link'
 import { media } from '../utils'
 import styled from 'styled-components'
 
-import PageYearContainer from '../containers/page_year_container'
-import PageMonthContainer from '../containers/page_month_container'
-import PageDayContainer from '../containers/page_day_container'
+import PageYear from '../containers/page_year'
+import PageMonth from '../containers/page_month'
+import PageDay from '../containers/page_day'
 
 import GlobalNav from '../auth/globalNav'
 import Signup from '../auth/signup'
@@ -62,10 +62,10 @@ export default class Router extends React.Component<Props> {
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Switch>
-          <Route exact path="/" component={PageMonthContainer} />
-          <Route exact path="/month/:year/:month" component={PageMonthContainer} />
-          <Route exact path="/day/:year/:month/:day" component={PageDayContainer} />
-          <Route exact path="/year/:year/" component={PageYearContainer} />
+          <Route exact path="/" component={PageMonth} />
+          <Route exact path="/month/:year/:month" component={PageMonth} />
+          <Route exact path="/day/:year/:month/:day" component={PageDay} />
+          <Route exact path="/year/:year/" component={PageYear} />
         </Switch>
       </Wrap>
     )

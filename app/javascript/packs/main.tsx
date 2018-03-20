@@ -5,7 +5,7 @@ import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-ro
 import ReactOnRails from 'react-on-rails'
 import createHistory from 'history/createBrowserHistory'
 import { BrowserRouter } from 'react-router-dom'
-import RouterContainer from '../containers/router_container'
+import Router from '../containers/router'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 
 import auth from '../reducers/auth'
@@ -38,7 +38,7 @@ const App = (props, railsContext) => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <RouterContainer />
+        <Router />
       </ConnectedRouter>
     </Provider>
   )

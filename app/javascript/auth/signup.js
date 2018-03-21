@@ -78,12 +78,13 @@ class Signup extends React.Component {
           Email: <input type="text" value={email} onChange={e => this.setState({ email: e.target.value })} />
         </p>
         <p>
-          Password: <input type="text" value={password} onChange={e => this.setState({ password: e.target.value })} />
+          Password:{' '}
+          <input type="password" value={password} onChange={e => this.setState({ password: e.target.value })} />
         </p>
         <p>
           Password Confirmation:{' '}
           <input
-            type="text"
+            type="password"
             value={passwordConfirmation}
             onChange={e => this.setState({ passwordConfirmation: e.target.value })}
           />

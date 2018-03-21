@@ -41,7 +41,11 @@ class Login extends React.Component {
         </p>
         <p>
           Password:{' '}
-          <input type="text" value={this.state.password} onChange={e => this.setState({ password: e.target.value })} />
+          <input
+            type="password"
+            value={this.state.password}
+            onChange={e => this.setState({ password: e.target.value })}
+          />
         </p>
         <p>
           <input type="submit" value="Login" onClick={this.handleSubmit.bind(this)} />

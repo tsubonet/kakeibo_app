@@ -9,6 +9,7 @@ import PageYear from '../containers/page_year'
 import PageMonth from '../containers/page_month'
 import PageDay from '../containers/page_day'
 
+import PrivateRoute from '../auth/privateRoute'
 import GlobalNav from '../auth/globalNav'
 import Signup from '../auth/signup'
 import Login from '../auth/login'
@@ -58,14 +59,13 @@ export default class Router extends React.Component<Props> {
           <Link href="/">かんたんな家計簿</Link>
         </Logo>
         <GlobalNav />
-
-        <Route path="/signup" component={Signup} />
-        <Route path="/login" component={Login} />
         <Switch>
-          <Route exact path="/" component={PageMonth} />
-          <Route exact path="/month/:year/:month" component={PageMonth} />
-          <Route exact path="/day/:year/:month/:day" component={PageDay} />
-          <Route exact path="/year/:year/" component={PageYear} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/login" component={Login} />
+          <PrivateRoute exact path="/" component={PageMonth} />
+          <PrivateRoute exact path="/month/:year/:month" component={PageMonth} />
+          <PrivateRoute exact path="/day/:year/:month/:day" component={PageDay} />
+          <PrivateRoute exact path="/year/:year/" component={PageYear} />
         </Switch>
       </Wrap>
     )

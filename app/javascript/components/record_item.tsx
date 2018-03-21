@@ -5,9 +5,10 @@ import styled from 'styled-components'
 import { media } from '../utils'
 
 interface Props {
+  auth: object
   record: Record
-  onDelete(record: Record): void
-  onUpdate(record: Record, data: RecordData): void
+  onDelete(auth, record: Record): void
+  onUpdate(auth, record: Record, data: RecordData): void
 }
 interface State {
   isEdit: boolean
@@ -30,13 +31,13 @@ export default class RecordItem extends React.Component<Props, State> {
 
   handleDelete(e) {
     e.preventDefault()
-    const { record, onDelete } = this.props
-    onDelete(record)
+    const { auth, record, onDelete } = this.props
+    onDelete(auth, record)
   }
 
   handleUpdate(data: RecordData) {
-    const { record, onUpdate } = this.props
-    onUpdate(record, data)
+    const { auth, record, onUpdate } = this.props
+    onUpdate(auth, record, data)
     this.setState({
       isEdit: false,
     })

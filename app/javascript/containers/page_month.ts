@@ -9,6 +9,4 @@ const mapStateToProps = ({ date, records }: StoreState) => {
   }
 }
 
-const PageMonthContainer = connect(mapStateToProps)(PageMonth)
-
-export default PageMonthContainer
+export default connect(mapStateToProps)(PageMonth)

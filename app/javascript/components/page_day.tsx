@@ -8,11 +8,12 @@ import styled from 'styled-components'
 import { media } from '../utils'
 
 interface Props {
+  auth: object
   date: Date
   records: Record[]
-  postRecord(data: RecordData): void
-  patchRecord(record: Record, data: RecordData): void
-  deleteRecord(record: Record): void
+  postRecord(auth, data: RecordData): void
+  patchRecord(auth, record: Record, data: RecordData): void
+  deleteRecord(auth, record: Record): void
 }
 
 export default class PageDay extends React.Component<Props> {
@@ -22,12 +23,12 @@ export default class PageDay extends React.Component<Props> {
   }
 
   onCreate(data: RecordData) {
-    const { date, postRecord } = this.props
+    const { auth, date, postRecord } = this.props
     const _data = {
       ...data,
       done_on: `${date.year}-${date.month}-${date.day}`,
     }
-    postRecord(_data)
+    postRecord(auth, _data)
   }
 
   getDay(): string {
@@ -39,7 +40,7 @@ export default class PageDay extends React.Component<Props> {
   }
 
   render() {
-    const { date, records, deleteRecord, patchRecord } = this.props
+    const { auth, date, records, deleteRecord, patchRecord } = this.props
     return (
       <div>
         <Caption>
@@ -80,7 +81,15 @@ export default class PageDay extends React.Component<Props> {
             {(() => {
               if (records.length) {
                 return records.map(record => {
-                  return <RecordItem key={record.id} record={record} onDelete={deleteRecord} onUpdate={patchRecord} />
+                  return (
+                    <RecordItem
+                      key={record.id}
+                      record={record}
+                      auth={auth}
+                      onDelete={deleteRecord}
+                      onUpdate={patchRecord}
+                    />
+                  )
                 })
               }
             })()}

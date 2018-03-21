@@ -183,25 +183,25 @@ function nationalHoliday(e, g, b, f) {
   return false
 }
 
-const sendGet = url => {
+const sendGet = (url, headers) => {
   return axios
     .get(url, {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.getElementsByName('csrf-token').item(0).content,
+        ...headers,
       },
     })
     .then(response => response.data)
 }
 
-const sendPost = (url, data) => {
+const sendPost = (url, data, headers) => {
   return axios
     .post(url, data, {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.getElementsByName('csrf-token').item(0).content,
+        // 'Content-Type': 'application/json',
+        // 'X-CSRF-Token': document.getElementsByName('csrf-token').item(0).content,
+        ...headers,
       },
     })
     .then(response => {
@@ -218,13 +218,14 @@ const sendPost = (url, data) => {
     })
 }
 
-const sendPatch = (url, data) => {
+const sendPatch = (url, data, headers) => {
   return axios
     .patch(url, data, {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.getElementsByName('csrf-token').item(0).content,
+        // 'Content-Type': 'application/json',
+        // 'X-CSRF-Token': document.getElementsByName('csrf-token').item(0).content,
+        ...headers,
       },
     })
     .then(response => {
@@ -241,13 +242,12 @@ const sendPatch = (url, data) => {
     })
 }
 
-const sendDelete = url => {
+const sendDelete = (url, headers) => {
   return axios
     .delete(url, {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.getElementsByName('csrf-token').item(0).content,
+        ...headers,
       },
     })
     .then(response => {

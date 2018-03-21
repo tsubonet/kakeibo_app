@@ -5,40 +5,41 @@ import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-ro
 import ReactOnRails from 'react-on-rails'
 import createHistory from 'history/createBrowserHistory'
 import { BrowserRouter } from 'react-router-dom'
-import RouterContainer from '../containers/router_container'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import Router from '../containers/router'
+import { compose, createStore, combineReducers, applyMiddleware } from 'redux'
+import persistState from 'redux-localstorage'
+import createSagaMiddleware from 'redux-saga'
+import mySaga from '../sagas'
 
 import auth from '../reducers/auth'
 import date from '../reducers/date'
 import records from '../reducers/records'
 import recordsYear from '../reducers/records_year'
 
-import logger from 'redux-logger'
-import createSagaMiddleware from 'redux-saga'
-import mySaga from '../sagas'
-
 const history = createHistory()
-const middleware = routerMiddleware(history)
 
 const App = (props, railsContext) => {
   const sagaMiddleware = createSagaMiddleware()
-  const store = createStore(
-    combineReducers({
-      auth,
-      date,
-      records,
-      recordsYear,
-      router: routerReducer,
-    }),
-    props,
-    applyMiddleware(middleware, sagaMiddleware, logger)
-  )
+  const middlewares = [routerMiddleware(history), sagaMiddleware]
+  if (process.env.NODE_ENV === 'development') {
+    const { logger } = require('redux-logger')
+    middlewares.push(logger)
+  }
+  const rootReducer = combineReducers({
+    auth,
+    date,
+    records,
+    recordsYear,
+    router: routerReducer,
+  })
+  const enhancer = compose(applyMiddleware(...middlewares), persistState('auth', { key: 'auth' }))
+  const store = createStore(rootReducer, props, enhancer)
   sagaMiddleware.run(mySaga)
 
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <RouterContainer />
+        <Router />
       </ConnectedRouter>
     </Provider>
   )

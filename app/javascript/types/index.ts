@@ -18,6 +18,7 @@ export interface RecordData {
 }
 
 export interface StoreState {
+  auth: object
   date: Date
   records: Record[]
   recordsYear: Record[][]

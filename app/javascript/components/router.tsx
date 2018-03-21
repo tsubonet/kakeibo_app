@@ -5,14 +5,19 @@ import Link from '../components/link'
 import { media } from '../utils'
 import styled from 'styled-components'
 
-import PageYearContainer from '../containers/page_year_container'
-import PageMonthContainer from '../containers/page_month_container'
-import PageDayContainer from '../containers/page_day_container'
+import PageYear from '../containers/page_year'
+import PageMonth from '../containers/page_month'
+import PageDay from '../containers/page_day'
+
+import PrivateRoute from '../auth/private_route'
+import GlobalNav from '../auth/global_nav'
+import Signup from '../auth/signup'
+import Login from '../auth/login'
 
 interface Props {
-  transitTo(url: string, { pushState }: { pushState: boolean }): void
-  transitTo(url: string, { pushState }: { pushState: boolean }, callback: object): void
-  history: any
+  transitTo(url: string, auth: object, history?: object): void
+  history: object
+  auth: object
 }
 export default class Router extends React.Component<Props> {
   static childContextTypes = {
@@ -30,20 +35,24 @@ export default class Router extends React.Component<Props> {
   }
 
   componentDidMount() {
-    const { transitTo } = this.props
-    window.addEventListener('popstate', () => {
+    const { auth, transitTo } = this.props
+    const fetchData = () => {
       const url: string = document.location.href
-      transitTo(url, { pushState: false })
+      transitTo(url, auth)
+    }
+    fetchData()
+    window.addEventListener('popstate', () => {
+      fetchData()
     })
   }
 
   onLinkClick(event: any): void {
     if (!event.metaKey) {
       event.preventDefault()
-      const { transitTo, history } = this.props
+      const { auth, transitTo, history } = this.props
       const anchorElement = event.currentTarget.pathname ? event.currentTarget : event.currentTarget.querySelector('a')
       const url: string = anchorElement.getAttribute('href')
-      transitTo(url, { pushState: true }, () => history.push(url))
+      transitTo(url, auth, history)
     }
   }
 
@@ -53,11 +62,14 @@ export default class Router extends React.Component<Props> {
         <Logo>
           <Link href="/">かんたんな家計簿</Link>
         </Logo>
+        <GlobalNav />
         <Switch>
-          <Route exact path="/" component={PageMonthContainer} />
-          <Route exact path="/month/:year/:month" component={PageMonthContainer} />
-          <Route exact path="/day/:year/:month/:day" component={PageDayContainer} />
-          <Route exact path="/year/:year/" component={PageYearContainer} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/login" component={Login} />
+          <PrivateRoute exact path="/" component={PageMonth} />
+          <PrivateRoute exact path="/month/:year/:month" component={PageMonth} />
+          <PrivateRoute exact path="/day/:year/:month/:day" component={PageDay} />
+          <PrivateRoute exact path="/year/:year/" component={PageYear} />
         </Switch>
       </Wrap>
     )

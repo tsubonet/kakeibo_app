@@ -183,13 +183,16 @@ function nationalHoliday(e, g, b, f) {
   return false
 }
 
-const sendGet = url => {
+const sendGet = (url, auth) => {
   return axios
     .get(url, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'X-CSRF-Token': document.getElementsByName('csrf-token').item(0).content,
+        'access-token': auth.accessToken,
+        client: auth.client,
+        uid: auth.uid,
+        expiry: auth.expiry,
       },
     })
     .then(response => response.data)

@@ -15,9 +15,10 @@ import Signup from '../auth/signup'
 import Login from '../auth/login'
 
 interface Props {
-  transitTo(url: string, { pushState }: { pushState: boolean }): void
-  transitTo(url: string, { pushState }: { pushState: boolean }, history: object): void
+  //transitTo(url: string, { pushState }: { pushState: boolean }): void
+  transitTo(url: string, { pushState }: { pushState: boolean }, history: object, auth): void
   history: object
+  auth
 }
 export default class Router extends React.Component<Props> {
   static childContextTypes = {
@@ -38,17 +39,17 @@ export default class Router extends React.Component<Props> {
     const { transitTo } = this.props
     window.addEventListener('popstate', () => {
       const url: string = document.location.href
-      transitTo(url, { pushState: false })
+      //transitTo(url, { pushState: false })
     })
   }
 
   onLinkClick(event: any): void {
     if (!event.metaKey) {
       event.preventDefault()
-      const { transitTo, history } = this.props
+      const { transitTo, history, auth } = this.props
       const anchorElement = event.currentTarget.pathname ? event.currentTarget : event.currentTarget.querySelector('a')
       const url: string = anchorElement.getAttribute('href')
-      transitTo(url, { pushState: true }, history)
+      transitTo(url, { pushState: true }, history, auth)
     }
   }
 

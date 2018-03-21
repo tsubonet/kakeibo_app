@@ -5,7 +5,7 @@ import { postRecord, patchRecord, deleteRecord, loadingStart, loadingEnd, authen
 function* handleFetchPootProps(action) {
   try {
     yield call(loadingStart)
-    const { date, records, recordsYear } = yield call(sendGet, action.payload.url)
+    const { date, records, recordsYear } = yield call(sendGet, action.payload.url, action.payload.auth)
     if (typeof date !== 'undefined') {
       yield put({ type: 'GET_DATE', date })
     }

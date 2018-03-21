@@ -6,7 +6,8 @@ import ReactOnRails from 'react-on-rails'
 import createHistory from 'history/createBrowserHistory'
 import { BrowserRouter } from 'react-router-dom'
 import Router from '../containers/router'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { compose, createStore, combineReducers, applyMiddleware } from 'redux'
+import persistState from 'redux-localstorage'
 
 import auth from '../reducers/auth'
 import date from '../reducers/date'
@@ -18,21 +19,19 @@ import createSagaMiddleware from 'redux-saga'
 import mySaga from '../sagas'
 
 const history = createHistory()
-const middleware = routerMiddleware(history)
 
 const App = (props, railsContext) => {
   const sagaMiddleware = createSagaMiddleware()
-  const store = createStore(
-    combineReducers({
-      auth,
-      date,
-      records,
-      recordsYear,
-      router: routerReducer,
-    }),
-    props,
-    applyMiddleware(middleware, sagaMiddleware, logger)
-  )
+  const middlewares = [routerMiddleware(history), sagaMiddleware, logger]
+  const rootReducer = combineReducers({
+    auth,
+    date,
+    records,
+    recordsYear,
+    router: routerReducer,
+  })
+  const enhancer = compose(applyMiddleware(...middlewares), persistState('auth', { key: 'auth' }))
+  const store = createStore(rootReducer, props, enhancer)
   sagaMiddleware.run(mySaga)
 
   return (

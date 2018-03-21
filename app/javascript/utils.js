@@ -199,6 +199,8 @@ const sendPost = (url, data, headers) => {
     .post(url, data, {
       headers: {
         Accept: 'application/json',
+        // 'Content-Type': 'application/json',
+        // 'X-CSRF-Token': document.getElementsByName('csrf-token').item(0).content,
         ...headers,
       },
     })
@@ -221,6 +223,8 @@ const sendPatch = (url, data, headers) => {
     .patch(url, data, {
       headers: {
         Accept: 'application/json',
+        // 'Content-Type': 'application/json',
+        // 'X-CSRF-Token': document.getElementsByName('csrf-token').item(0).content,
         ...headers,
       },
     })

@@ -34,7 +34,7 @@ class Login extends React.Component {
         <h2>Login</h2>
         {(() => {
           if (auth.fail) {
-            return <div>失敗しました</div>
+            return <div>正しい値を入力してください</div>
           }
         })()}
 

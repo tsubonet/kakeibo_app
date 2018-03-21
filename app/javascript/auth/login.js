@@ -14,9 +14,9 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    const { isAuthenticated, transitTo, history } = this.props
-    if (isAuthenticated) {
-      transitTo('/', { pushState: true }, history)
+    const { auth, transitTo, history } = this.props
+    if (auth.isAuthenticated) {
+      transitTo('/', auth, history)
     }
   }
 
@@ -34,25 +34,23 @@ class Login extends React.Component {
   }
 
   render() {
+    const { auth } = this.props
+    const { email, password } = this.state
     return (
       <div>
         <h2>Login</h2>
         {(() => {
-          if (this.props.auth.fail) {
+          if (auth.fail) {
             return <div>失敗しました</div>
           }
         })()}
 
         <p>
-          Email: <input type="text" value={this.state.email} onChange={e => this.setState({ email: e.target.value })} />
+          Email: <input type="text" value={email} onChange={e => this.setState({ email: e.target.value })} />
         </p>
         <p>
           Password:{' '}
-          <input
-            type="password"
-            value={this.state.password}
-            onChange={e => this.setState({ password: e.target.value })}
-          />
+          <input type="password" value={password} onChange={e => this.setState({ password: e.target.value })} />
         </p>
         <p>
           <input type="submit" value="Login" onClick={this.handleSubmit.bind(this)} />
@@ -64,18 +62,13 @@ class Login extends React.Component {
 
 function mapStateToProps(state) {
   const { auth } = state
-  const { loading, isAuthenticated } = auth
-  return {
-    loading,
-    isAuthenticated,
-    auth,
-  }
+  return { auth }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    transitTo: (url, pushState, history) => {
-      dispatch(fetchRootProps(url, pushState, history))
+    transitTo: (url, auth, history) => {
+      dispatch(fetchRootProps(auth, url, history))
     },
     authenticate: (email, password) => {
       dispatch(authenticate(email, password))

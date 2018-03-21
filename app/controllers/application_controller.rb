@@ -16,10 +16,10 @@ class ApplicationController < ActionController::Base
   end
 
   def render_for_react(props: {}, status: 200)
-    puts "####################"
-    puts current_user
-    puts user_signed_in?
-    puts "####################"
+    # puts "####################"
+    # puts current_user
+    # puts user_signed_in?
+    # puts "####################"
     if request.format.json?
       response.headers["Cache-Control"] = "no-cache, no-store"
       response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"

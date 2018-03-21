@@ -18,9 +18,9 @@ class Signup extends React.Component {
   }
 
   componentDidMount() {
-    const { isAuthenticated, transitTo, history } = this.props
-    if (isAuthenticated) {
-      transitTo('/', { pushState: true }, history)
+    const { auth, transitTo, history } = this.props
+    if (auth.isAuthenticated) {
+      transitTo('/', auth, history)
     }
   }
 
@@ -99,14 +99,13 @@ class Signup extends React.Component {
 
 function mapStateToProps(state) {
   const { auth } = state
-  const { isAuthenticated } = auth
-  return { isAuthenticated }
+  return { auth }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    transitTo: (url, pushState, history) => {
-      dispatch(fetchRootProps(url, pushState, history))
+    transitTo: (url, auth, history) => {
+      dispatch(fetchRootProps(auth, url, history))
     },
   }
 }

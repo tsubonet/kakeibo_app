@@ -36,13 +36,13 @@ export default class Router extends React.Component<Props> {
 
   componentDidMount() {
     const { auth, transitTo } = this.props
-
-    const url: string = document.location.href
-    transitTo(url, auth)
-
-    window.addEventListener('popstate', () => {
+    const fetchData = () => {
       const url: string = document.location.href
       transitTo(url, auth)
+    }
+    fetchData()
+    window.addEventListener('popstate', () => {
+      fetchData()
     })
   }
 

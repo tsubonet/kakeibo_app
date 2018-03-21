@@ -1,5 +1,7 @@
 class CalendarController < ApplicationController
 
+  #before_action :authenticate_user!
+
   def month
 
     # TODO

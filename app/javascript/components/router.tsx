@@ -15,7 +15,7 @@ import Signup from '../auth/signup'
 import Login from '../auth/login'
 
 interface Props {
-  transitTo(auth: object, url: string, history?: object): void
+  transitTo(url: string, auth: object, history?: object): void
   history: object
   auth: object
 }
@@ -38,7 +38,7 @@ export default class Router extends React.Component<Props> {
     const { auth, transitTo } = this.props
     window.addEventListener('popstate', () => {
       const url: string = document.location.href
-      transitTo(auth, url)
+      transitTo(url, auth)
     })
   }
 
@@ -48,7 +48,7 @@ export default class Router extends React.Component<Props> {
       const { auth, transitTo, history } = this.props
       const anchorElement = event.currentTarget.pathname ? event.currentTarget : event.currentTarget.querySelector('a')
       const url: string = anchorElement.getAttribute('href')
-      transitTo(auth, url, history)
+      transitTo(url, auth, history)
     }
   }
 

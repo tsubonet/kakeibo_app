@@ -9,7 +9,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    transitTo: (auth, url, history) => {
+    transitTo: (url, auth, history) => {
       dispatch(fetchRootProps(auth, url, history))
     },
   }

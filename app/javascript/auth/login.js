@@ -20,13 +20,6 @@ class Login extends React.Component {
     }
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   const { auth, transitTo, history } = nextProps
-  //   if (auth.isAuthenticated) {
-  //     transitTo('/', auth, history)
-  //   }
-  // }
-
   handleSubmit() {
     const { authenticate, history } = this.props
     const { email, password } = this.state

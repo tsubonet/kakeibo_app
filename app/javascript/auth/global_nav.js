@@ -11,7 +11,7 @@ class GlobalNav extends React.Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props
+    const { isAuthenticated } = this.props.auth
     return (
       <div>
         <div>
@@ -30,8 +30,7 @@ class GlobalNav extends React.Component {
 
 function mapStateToProps(state) {
   const { auth } = state
-  const { isAuthenticated } = auth
-  return { isAuthenticated, auth }
+  return { auth }
 }
 
 export default connect(mapStateToProps)(GlobalNav)

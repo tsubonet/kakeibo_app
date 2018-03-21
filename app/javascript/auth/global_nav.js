@@ -15,11 +15,11 @@ class GlobalNav extends React.Component {
     return (
       <div>
         <div>
-          {!isAuthenticated && <Link href="/signup">Signup</Link>}
-          {!isAuthenticated && <Link href="/login">Login</Link>}
+          {!isAuthenticated && <Link href="/signup">新規登録</Link>}{' '}
+          {!isAuthenticated && <Link href="/login">ログイン</Link>}
           {isAuthenticated && (
             <a href="#" onClick={this.signout.bind(this)}>
-              Signout
+              ログアウト
             </a>
           )}
         </div>

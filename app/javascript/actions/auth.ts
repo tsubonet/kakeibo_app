@@ -1,9 +1,10 @@
-export function authenticate(email, password) {
+export function authenticate(email, password, history) {
   return {
     type: 'AUTHENTICATE_REQUESTED',
     payload: {
       email,
       password,
+      history,
     },
   }
 }

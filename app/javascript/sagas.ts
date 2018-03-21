@@ -68,7 +68,15 @@ function* handleAuthenticate(action) {
     action.payload.password
   )
   if (status === 200) {
-    yield put({ type: 'AUTH_RECEIVED', uid, client, accessToken, expiry })
+    const auth = yield put({ type: 'AUTH_RECEIVED', uid, client, accessToken, expiry })
+    yield put({
+      type: 'FETCH_ROOT_RROPS_REQUESTED',
+      payload: {
+        auth: auth,
+        url: '/',
+        history: action.payload.history,
+      },
+    })
   } else {
     yield put({ type: 'AUTH_FAILED' })
   }
@@ -78,7 +86,6 @@ function* handleAuthenticate(action) {
 function* handleSignOut(action) {
   yield call(loadingStart)
   const { status } = yield call(signout, action.payload.auth)
-  console.log(status)
   if (status === 200) {
     yield put({ type: 'AUTH_SIGNOUT' })
   }

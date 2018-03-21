@@ -28,9 +28,9 @@ class Login extends React.Component {
   // }
 
   handleSubmit() {
-    const { authenticate } = this.props
+    const { authenticate, history } = this.props
     const { email, password } = this.state
-    authenticate(email, password)
+    authenticate(email, password, history)
   }
 
   render() {
@@ -70,8 +70,8 @@ const mapDispatchToProps = dispatch => {
     transitTo: (url, auth, history) => {
       dispatch(fetchRootProps(auth, url, history))
     },
-    authenticate: (email, password, callback) => {
-      dispatch(authenticate(email, password, callback))
+    authenticate: (email, password, history) => {
+      dispatch(authenticate(email, password, history))
     },
   }
 }

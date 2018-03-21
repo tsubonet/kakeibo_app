@@ -70,8 +70,8 @@ const mapDispatchToProps = dispatch => {
     transitTo: (url, auth, history) => {
       dispatch(fetchRootProps(auth, url, history))
     },
-    authenticate: (email, password) => {
-      dispatch(authenticate(email, password))
+    authenticate: (email, password, callback) => {
+      dispatch(authenticate(email, password, callback))
     },
   }
 }

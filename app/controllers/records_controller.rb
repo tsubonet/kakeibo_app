@@ -5,7 +5,7 @@ class RecordsController < ApplicationController
   # POST /records
   # POST /records.json
   def create
-    record = Record.new(record_params)
+    record = current_user.records.build(record_params)
     if record.save
       response_data = {
         record: record,
@@ -24,6 +24,12 @@ class RecordsController < ApplicationController
   # PATCH /records/1.json
   def update
     record = Record.find(params[:id])
+
+    if record.user != current_user
+      render json: { txt: ['You don\'t have the record'] }, status: :not_found
+      return
+    end
+
     if record.update(record_params)
       response_data = {
         record: record,
@@ -42,6 +48,12 @@ class RecordsController < ApplicationController
   # DELETE /records/1.json
   def destroy
     record = Record.find(params[:id])
+
+    if record.user != current_user
+      render json: { txt: ['You don\'t have the record'] }, status: :not_found
+      return
+    end
+
     if record.destroy
       response_data = {
         txt: ['削除しました！'],

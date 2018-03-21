@@ -14,6 +14,12 @@ class CalendarController < ApplicationController
       year, month = Time.new.year, Time.new.month
     end
 
+    if current_user.nil?
+      records = []
+    else
+      records = current_user.records.where(done_on: Time.new(year, month, 1).all_month)
+    end
+
     render_for_react(
       props: {
         date: {
@@ -21,7 +27,7 @@ class CalendarController < ApplicationController
           month: month,
           day: 1,
         },
-        records: Record.where(done_on: Time.new(year, month, 1).all_month),
+        records: records,
       },
     )
   end
@@ -43,7 +49,7 @@ class CalendarController < ApplicationController
           month: month,
           day: day,
         },
-        records: Record.where(done_on: Time.new(year, month, day)),
+        records: current_user.records.where(done_on: Time.new(year, month, day)),
       },
     )
   end
@@ -60,7 +66,7 @@ class CalendarController < ApplicationController
 
     records_year = []
     (1..12).each do |i|
-      records_year << Record.where(done_on: Time.new(year, i, 1).all_month)
+      records_year << current_user.records.where(done_on: Time.new(year, i, 1).all_month)
     end
 
     render_for_react(

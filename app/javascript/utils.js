@@ -183,12 +183,11 @@ function nationalHoliday(e, g, b, f) {
   return false
 }
 
-const sendGet = (url, auth) => {
+const sendGet = (auth, url) => {
   return axios
     .get(url, {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
         'access-token': auth.accessToken,
         client: auth.client,
         uid: auth.uid,
@@ -203,8 +202,6 @@ const sendPost = (url, data) => {
     .post(url, data, {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.getElementsByName('csrf-token').item(0).content,
       },
     })
     .then(response => {
@@ -226,8 +223,6 @@ const sendPatch = (url, data) => {
     .patch(url, data, {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.getElementsByName('csrf-token').item(0).content,
       },
     })
     .then(response => {
@@ -249,8 +244,6 @@ const sendDelete = url => {
     .delete(url, {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': document.getElementsByName('csrf-token').item(0).content,
       },
     })
     .then(response => {

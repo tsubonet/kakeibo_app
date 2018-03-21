@@ -3,20 +3,18 @@ import * as constants from '../constants'
 export interface fetchRootProps {
   type: constants.FETCH_ROOT_RROPS_REQUESTED
   payload: {
+    auth: object
     url: string
-    pushState: boolean
     history: object
-    auth: any
   }
 }
-export function fetchRootProps(url, { pushState }, history, auth): fetchRootProps {
+export function fetchRootProps(auth, url, history): fetchRootProps {
   return {
     type: constants.FETCH_ROOT_RROPS_REQUESTED,
     payload: {
-      url,
-      pushState,
-      history,
       auth,
+      url,
+      history,
     },
   }
 }

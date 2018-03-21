@@ -25,12 +25,11 @@ export const deleteRecord = record => {
 export const authenticate = (email, password) => {
   return axios
     .post(
-      `/auth/sign_in`,
+      '/auth/sign_in',
       { email, password },
       {
         headers: {
           Accept: 'application/json',
-          'Content-Type': 'application/json',
         },
       }
     )
@@ -56,7 +55,6 @@ export const signout = auth => {
     .delete('/auth/sign_out', {
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
         'access-token': auth.accessToken,
         client: auth.client,
         uid: auth.uid,

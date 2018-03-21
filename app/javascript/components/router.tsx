@@ -9,16 +9,15 @@ import PageYear from '../containers/page_year'
 import PageMonth from '../containers/page_month'
 import PageDay from '../containers/page_day'
 
-import PrivateRoute from '../auth/privateRoute'
-import GlobalNav from '../auth/globalNav'
+import PrivateRoute from '../auth/private_route'
+import GlobalNav from '../auth/global_nav'
 import Signup from '../auth/signup'
 import Login from '../auth/login'
 
 interface Props {
-  //transitTo(url: string, { pushState }: { pushState: boolean }): void
-  transitTo(url: string, { pushState }: { pushState: boolean }, history: object, auth): void
+  transitTo(auth: object, url: string, history?: object): void
   history: object
-  auth
+  auth: object
 }
 export default class Router extends React.Component<Props> {
   static childContextTypes = {
@@ -36,20 +35,20 @@ export default class Router extends React.Component<Props> {
   }
 
   componentDidMount() {
-    const { transitTo } = this.props
+    const { auth, transitTo } = this.props
     window.addEventListener('popstate', () => {
       const url: string = document.location.href
-      //transitTo(url, { pushState: false })
+      transitTo(auth, url)
     })
   }
 
   onLinkClick(event: any): void {
     if (!event.metaKey) {
       event.preventDefault()
-      const { transitTo, history, auth } = this.props
+      const { auth, transitTo, history } = this.props
       const anchorElement = event.currentTarget.pathname ? event.currentTarget : event.currentTarget.querySelector('a')
       const url: string = anchorElement.getAttribute('href')
-      transitTo(url, { pushState: true }, history, auth)
+      transitTo(auth, url, history)
     }
   }
 

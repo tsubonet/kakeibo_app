@@ -9,8 +9,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    transitTo: (url, pushState, history, auth) => {
-      dispatch(fetchRootProps(url, pushState, history, auth))
+    transitTo: (auth, url, history) => {
+      dispatch(fetchRootProps(auth, url, history))
     },
   }
 }

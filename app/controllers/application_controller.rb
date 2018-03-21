@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
 
   def render_for_react(props: {}, status: 200)
     puts "####################"
+    puts current_user
     puts user_signed_in?
     puts "####################"
     if request.format.json?

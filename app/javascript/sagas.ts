@@ -1,11 +1,19 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import { sendGet } from './utils'
-import { postRecord, patchRecord, deleteRecord, loadingStart, loadingEnd, authenticate, signout } from './api'
+import {
+  transitTo,
+  postRecord,
+  patchRecord,
+  deleteRecord,
+  loadingStart,
+  loadingEnd,
+  authenticate,
+  signout,
+} from './api'
 
 function* handleFetchRootProps(action) {
   try {
     yield call(loadingStart)
-    const { date, records, recordsYear } = yield call(sendGet, action.payload.auth, action.payload.url)
+    const { date, records, recordsYear } = yield call(transitTo, action.payload.auth, action.payload.url)
     if (typeof date !== 'undefined') {
       yield put({ type: 'GET_DATE', date })
     }
@@ -27,7 +35,7 @@ function* handleFetchRootProps(action) {
 
 function* handlePostRecord(action) {
   yield call(loadingStart)
-  const { status, record } = yield call(postRecord, action.payload.data)
+  const { status, record } = yield call(postRecord, action.payload.auth, action.payload.data)
   if (status === 201) {
     yield put({ type: 'POST_RECORD', record })
   }
@@ -36,7 +44,7 @@ function* handlePostRecord(action) {
 
 function* handlePatchRecord(action) {
   yield call(loadingStart)
-  const { status, record } = yield call(patchRecord, action.payload.record, action.payload.data)
+  const { status, record } = yield call(patchRecord, action.payload.auth, action.payload.record, action.payload.data)
   if (status === 200) {
     yield put({ type: 'PATCH_RECORD', record })
   }
@@ -45,7 +53,7 @@ function* handlePatchRecord(action) {
 
 function* handleDeleteRecord(action) {
   yield call(loadingStart)
-  const { status } = yield call(deleteRecord, action.payload.record)
+  const { status } = yield call(deleteRecord, action.payload.auth, action.payload.record)
   if (status === 200) {
     yield put({ type: 'DELETE_RECORD', record: action.payload.record })
   }

@@ -183,25 +183,23 @@ function nationalHoliday(e, g, b, f) {
   return false
 }
 
-const sendGet = (auth, url) => {
+const sendGet = (url, headers) => {
   return axios
     .get(url, {
       headers: {
         Accept: 'application/json',
-        'access-token': auth.accessToken,
-        client: auth.client,
-        uid: auth.uid,
-        expiry: auth.expiry,
+        ...headers,
       },
     })
     .then(response => response.data)
 }
 
-const sendPost = (url, data) => {
+const sendPost = (url, data, headers) => {
   return axios
     .post(url, data, {
       headers: {
         Accept: 'application/json',
+        ...headers,
       },
     })
     .then(response => {
@@ -218,11 +216,12 @@ const sendPost = (url, data) => {
     })
 }
 
-const sendPatch = (url, data) => {
+const sendPatch = (url, data, headers) => {
   return axios
     .patch(url, data, {
       headers: {
         Accept: 'application/json',
+        ...headers,
       },
     })
     .then(response => {
@@ -239,11 +238,12 @@ const sendPatch = (url, data) => {
     })
 }
 
-const sendDelete = url => {
+const sendDelete = (url, headers) => {
   return axios
     .delete(url, {
       headers: {
         Accept: 'application/json',
+        ...headers,
       },
     })
     .then(response => {

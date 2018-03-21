@@ -9,13 +9,15 @@ export interface postData {
 export interface postRecord {
   type: constants.POST_RECORD_REQUESTED
   payload: {
+    auth: object
     data: postData
   }
 }
-export function postRecord(data: postData): postRecord {
+export function postRecord(auth, data: postData): postRecord {
   return {
     type: constants.POST_RECORD_REQUESTED,
     payload: {
+      auth,
       data,
     },
   }
@@ -28,14 +30,16 @@ export interface patchData {
 export interface patchRecord {
   type: constants.PATCH_RECORD_REQUESTED
   payload: {
+    auth: object
     record: Record
     data: patchData
   }
 }
-export function patchRecord(record, data): patchRecord {
+export function patchRecord(auth, record, data): patchRecord {
   return {
     type: constants.PATCH_RECORD_REQUESTED,
     payload: {
+      auth,
       record,
       data,
     },
@@ -45,13 +49,15 @@ export function patchRecord(record, data): patchRecord {
 export interface deleteRecord {
   type: constants.DELETE_RECORD_REQUESTED
   payload: {
+    auth: object
     record: Record
   }
 }
-export function deleteRecord(record: Record): deleteRecord {
+export function deleteRecord(auth, record: Record): deleteRecord {
   return {
     type: constants.DELETE_RECORD_REQUESTED,
     payload: {
+      auth,
       record,
     },
   }

@@ -10,16 +10,40 @@ export const loadingEnd = () => {
   return NProgress.done()
 }
 
-export const postRecord = data => {
-  return sendPost('/records', data)
+export const transitTo = (auth, url) => {
+  return sendGet(url, {
+    'access-token': auth.accessToken,
+    client: auth.client,
+    uid: auth.uid,
+    expiry: auth.expiry,
+  })
 }
 
-export const patchRecord = (record, data) => {
-  return sendPatch(`/records/${record.id}`, data)
+export const postRecord = (auth, data) => {
+  return sendPost('/records', data, {
+    'access-token': auth.accessToken,
+    client: auth.client,
+    uid: auth.uid,
+    expiry: auth.expiry,
+  })
 }
 
-export const deleteRecord = record => {
-  return sendDelete(`/records/${record.id}`)
+export const patchRecord = (auth, record, data) => {
+  return sendPatch(`/records/${record.id}`, data, {
+    'access-token': auth.accessToken,
+    client: auth.client,
+    uid: auth.uid,
+    expiry: auth.expiry,
+  })
+}
+
+export const deleteRecord = (auth, record) => {
+  return sendDelete(`/records/${record.id}`, {
+    'access-token': auth.accessToken,
+    client: auth.client,
+    uid: auth.uid,
+    expiry: auth.expiry,
+  })
 }
 
 export const authenticate = (email, password) => {

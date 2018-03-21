@@ -21,9 +21,9 @@ class Login extends React.Component {
   }
 
   // componentWillReceiveProps(nextProps) {
-  //   const { transitTo, history } = this.props
-  //   if (nextProps.isAuthenticated) {
-  //     transitTo('/', { pushState: true }, history)
+  //   const { auth, transitTo, history } = nextProps
+  //   if (auth.isAuthenticated) {
+  //     transitTo('/', auth, history)
   //   }
   // }
 

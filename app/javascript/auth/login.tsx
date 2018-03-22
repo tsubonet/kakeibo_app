@@ -1,10 +1,22 @@
-import React from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 import { authenticate } from '../actions/auth'
 import { fetchRootProps } from '../actions/common'
 import { withRouter } from 'react-router'
+import { StoreState, Auth } from '../types/index'
 
-class Login extends React.Component {
+interface Props {
+  auth: Auth
+  history: object
+  transitTo
+  authenticate
+}
+interface State {
+  email: string
+  password: string
+  authFailure: boolean
+}
+class Login extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
@@ -41,7 +53,6 @@ class Login extends React.Component {
             return <div>正しい値を入力してください</div>
           }
         })()}
-
         <p>
           Email: <input type="text" value={email} onChange={e => this.setState({ email: e.target.value })} />
         </p>
@@ -57,17 +68,16 @@ class Login extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { auth } = state
+function mapStateToProps({ auth }: StoreState) {
   return { auth }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    transitTo: (url, auth, history) => {
+    transitTo: (url: string, auth: Auth, history: object) => {
       dispatch(fetchRootProps(auth, url, history))
     },
-    authenticate: (email, password, history) => {
+    authenticate: (email: string, password: string, history: object) => {
       dispatch(authenticate(email, password, history))
     },
   }

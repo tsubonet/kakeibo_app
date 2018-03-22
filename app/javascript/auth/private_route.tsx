@@ -1,6 +1,7 @@
-import React from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect, withRouter } from 'react-router-dom'
+import { StoreState } from '../types/index'
 
 const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
   <Route
@@ -20,8 +21,7 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
   />
 )
 
-function mapStateToProps(state) {
-  const { auth } = state
+function mapStateToProps({ auth }: StoreState) {
   const { isAuthenticated } = auth
   return { isAuthenticated }
 }

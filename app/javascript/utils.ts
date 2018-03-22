@@ -81,7 +81,7 @@ function shunbun(a) {
       }
       return 20
   }
-  return day
+  //return day
 }
 function shubun(a) {
   if (a < 1900 || a > 2099) {
@@ -265,14 +265,14 @@ const sendDelete = (url, headers) => {
 }
 
 const media = {
-  pc: (...args) => css`
+  pc: (...args: any[]) => css`
     @media (min-width: 768px) {
-      ${css(...args)};
+      ${css.call(this, ...args)};
     }
   `,
-  sp: (...args) => css`
+  sp: (...args: any[]) => css`
     @media (max-width: 767px) {
-      ${css(...args)};
+      ${css.call(this, ...args)};
     }
   `,
   // tablet: (...args) => css`

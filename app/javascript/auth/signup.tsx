@@ -1,10 +1,26 @@
-import React from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { fetchRootProps } from '../actions/common'
 import { withRouter } from 'react-router'
+import { StoreState, Auth } from '../types/index'
 
-class Signup extends React.Component {
+interface Props {
+  auth: Auth
+  history: object
+  transitTo
+  authenticate
+}
+interface State {
+  name: string
+  email: string
+  password: string
+  passwordConfirmation: string
+  redirectToReferrer: boolean
+  errorMessages: string[]
+}
+
+class Signup extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
@@ -33,7 +49,7 @@ class Signup extends React.Component {
     fb.append('password_confirmation', passwordConfirmation)
     fetch('/auth', {
       method: 'POST',
-      header: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: fb,
     })
       .then(res => res.json())
@@ -97,14 +113,13 @@ class Signup extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { auth } = state
+function mapStateToProps({ auth }: StoreState) {
   return { auth }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    transitTo: (url, auth, history) => {
+    transitTo: (url: string, auth: Auth, history: object) => {
       dispatch(fetchRootProps(auth, url, history))
     },
   }

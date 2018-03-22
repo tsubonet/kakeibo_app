@@ -1,9 +1,14 @@
-import React from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux'
 import Link from '../components/link'
 import { signout } from '../actions/auth'
+import { StoreState, Auth } from '../types/index'
 
-class GlobalNav extends React.Component {
+interface Props {
+  auth: Auth
+  dispatch
+}
+class GlobalNav extends React.Component<Props> {
   signout(e) {
     const { auth } = this.props
     e.preventDefault()
@@ -11,13 +16,13 @@ class GlobalNav extends React.Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props.auth
+    const { auth } = this.props
     return (
       <div>
         <div>
-          {!isAuthenticated && <Link href="/signup">新規登録</Link>}{' '}
-          {!isAuthenticated && <Link href="/login">ログイン</Link>}
-          {isAuthenticated && (
+          {!auth.isAuthenticated && <Link href="/signup">新規登録</Link>}{' '}
+          {!auth.isAuthenticated && <Link href="/login">ログイン</Link>}
+          {auth.isAuthenticated && (
             <a href="#" onClick={this.signout.bind(this)}>
               ログアウト
             </a>
@@ -28,8 +33,7 @@ class GlobalNav extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { auth } = state
+function mapStateToProps({ auth }: StoreState) {
   return { auth }
 }
 

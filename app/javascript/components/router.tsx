@@ -19,6 +19,7 @@ interface Props {
   history: object
   auth: object
 }
+
 export default class Router extends React.Component<Props> {
   static childContextTypes = {
     onLinkClick: PropTypes.func,
@@ -36,17 +37,21 @@ export default class Router extends React.Component<Props> {
 
   componentDidMount() {
     const { auth, transitTo } = this.props
+    const url: string = document.location.href
+
     const fetchData = () => {
-      const url: string = document.location.href
       transitTo(url, auth)
     }
-    fetchData()
+
+    if (!/signup|login/.test(url)) {
+      fetchData()
+    }
     window.addEventListener('popstate', () => {
       fetchData()
     })
   }
 
-  onLinkClick(event: any): void {
+  onLinkClick(event): void {
     if (!event.metaKey) {
       event.preventDefault()
       const { auth, transitTo, history } = this.props

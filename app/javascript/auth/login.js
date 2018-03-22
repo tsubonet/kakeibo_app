@@ -10,6 +10,7 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      authFailure: false,
     }
   }
 
@@ -20,6 +21,10 @@ class Login extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ authFailure: nextProps.auth.fail })
+  }
+
   handleSubmit() {
     const { authenticate, history } = this.props
     const { email, password } = this.state
@@ -27,13 +32,12 @@ class Login extends React.Component {
   }
 
   render() {
-    const { auth } = this.props
-    const { email, password } = this.state
+    const { email, password, authFailure } = this.state
     return (
       <div>
         <h2>Login</h2>
         {(() => {
-          if (auth.fail) {
+          if (authFailure) {
             return <div>正しい値を入力してください</div>
           }
         })()}

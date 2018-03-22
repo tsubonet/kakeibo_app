@@ -93,7 +93,7 @@ function* handleSignOut(action) {
 }
 
 function* mySaga() {
-  yield takeLatest('FETCH_ROOT_RROPS_REQUESTED', handleFetchRootProps)
+  yield takeLatest('FETCH_ROOT_PROPS_REQUESTED', handleFetchRootProps)
 
   yield takeLatest('POST_RECORD_REQUESTED', handlePostRecord)
   yield takeLatest('PATCH_RECORD_REQUESTED', handlePatchRecord)

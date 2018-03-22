@@ -1,3 +1,11 @@
+export interface Auth {
+  accessToken: string
+  client: string
+  expiry: string
+  uid: string
+  isAuthenticated: boolean
+}
+
 export interface Date {
   year: number
   month: number
@@ -18,7 +26,7 @@ export interface RecordData {
 }
 
 export interface StoreState {
-  auth: object
+  auth: Auth
   date: Date
   records: Record[]
   recordsYear: Record[][]

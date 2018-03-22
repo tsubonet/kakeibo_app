@@ -1,6 +1,9 @@
-export function authenticate(email, password, history) {
+import * as constants from '../constants'
+import { Auth } from '../types/index'
+
+export function authenticate(email: string, password: string, history: object): object {
   return {
-    type: 'AUTHENTICATE_REQUESTED',
+    type: constants.AUTHENTICATE_REQUESTED,
     payload: {
       email,
       password,
@@ -9,9 +12,9 @@ export function authenticate(email, password, history) {
   }
 }
 
-export function signout(auth) {
+export function signout(auth: Auth): object {
   return {
-    type: 'SIGNOUT_REQUESTED',
+    type: constants.SIGNOUT_REQUESTED,
     payload: {
       auth,
     },

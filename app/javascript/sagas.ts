@@ -1,3 +1,4 @@
+import * as constants from './constants'
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import {
   transitTo,
@@ -70,7 +71,7 @@ function* handleAuthenticate(action) {
   if (status === 200) {
     const auth = yield put({ type: 'AUTH_RECEIVED', uid, client, accessToken, expiry })
     yield put({
-      type: 'FETCH_ROOT_RROPS_REQUESTED',
+      type: constants.FETCH_ROOT_PROPS_REQUESTED,
       payload: {
         auth: auth,
         url: '/',

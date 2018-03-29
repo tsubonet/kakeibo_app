@@ -1,12 +1,12 @@
 import * as constants from '../constants'
 import { Date, Record, Auth } from '../types/index'
 
-export interface postData {
+export interface PostData {
   sort: string
   price: number
   done_on: string
 }
-export function postRecord(auth: Auth, data: postData): object {
+export function postRecord(auth: Auth, data: PostData): object {
   return {
     type: constants.POST_RECORD_REQUESTED,
     payload: {
@@ -16,11 +16,11 @@ export function postRecord(auth: Auth, data: postData): object {
   }
 }
 
-export interface patchData {
+export interface PatchData {
   sort: string
   price: number
 }
-export function patchRecord(auth: Auth, record: Record, data: patchData): object {
+export function patchRecord(auth: Auth, record: Record, data: PatchData): object {
   return {
     type: constants.PATCH_RECORD_REQUESTED,
     payload: {

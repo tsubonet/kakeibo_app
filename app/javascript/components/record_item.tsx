@@ -1,14 +1,14 @@
 import * as React from 'react'
 import InputExpense from '../components/input_expense'
-import { Record, RecordData } from '../types/index'
+import { Record, RecordData, Auth } from '../types/index'
 import styled from 'styled-components'
 import { media } from '../utils'
 
 interface Props {
-  auth: object
+  auth: Auth
   record: Record
-  onDelete(auth, record: Record): void
-  onUpdate(auth, record: Record, data: RecordData): void
+  onDelete(auth: Auth, record: Record): void
+  onUpdate(auth: Auth, record: Record, data: RecordData): void
 }
 interface State {
   isEdit: boolean

@@ -32,7 +32,7 @@ export default class InputExpense extends React.Component<Props, State> {
     const { onCreate } = this.props
     const { sort, sortCustom, price } = this.state
     const tempSort = sort === '項目を入力する' ? sortCustom : sort
-    if (tempSort === '' || price === '' || price === NaN) {
+    if (tempSort === '' || price === '' || isNaN(Number(price))) {
       confirm('未入力の項目があります。')
       return
     }
@@ -52,7 +52,7 @@ export default class InputExpense extends React.Component<Props, State> {
     const { onUpdate } = this.props
     const { sort, sortCustom, price } = this.state
     const tempSort = sort === '項目を入力する' ? sortCustom : sort
-    if (tempSort === '' || price === '' || price === NaN) {
+    if (tempSort === '' || price === '' || isNaN(Number(price))) {
       confirm('未入力の項目があります。')
       return
     }
@@ -112,7 +112,7 @@ export default class InputExpense extends React.Component<Props, State> {
             placeholder="例)100"
             value={price}
             onChange={e => {
-              this.setState({ price: parseInt(e.target.value) })
+              this.setState({ price: parseInt(e.target.value, 10) })
             }}
           />{' '}
           円

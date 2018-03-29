@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom'
 import Link from '../components/link'
 import { media } from '../utils'
 import styled from 'styled-components'
+import { Auth } from '../types/index'
 
 import PageYear from '../containers/page_year'
 import PageMonth from '../containers/page_month'
@@ -15,9 +16,9 @@ import Signup from '../auth/signup'
 import Login from '../auth/login'
 
 interface Props {
-  transitTo(url: string, auth: object, history?: object): void
   history: object
-  auth: object
+  auth: Auth
+  transitTo(url: string, auth: Auth, history?: object): void
 }
 
 export default class Router extends React.Component<Props> {

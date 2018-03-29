@@ -25,7 +25,7 @@ export default class Calendar extends React.Component<Props> {
     const { date } = this.props
     const holidayList = getHoliday(date.year)
       .filter((holiday, i) => {
-        return parseInt(holiday.month) === date.month // 当月のみ格納
+        return parseInt(holiday.month, 10) === date.month // 当月のみ格納
       })
       .map((holiday, i) => {
         return holiday.day
@@ -111,7 +111,7 @@ export default class Calendar extends React.Component<Props> {
                       return days.map((day, j) => {
                         const dd = cells[j + i * daysLength]
                         const filteredRecords = records.filter(record => {
-                          //const pattern = new RegExp('\\d{4}-\\d{2}-' + String(dd).padStart(2, '0'));
+                          // const pattern = new RegExp('\\d{4}-\\d{2}-' + String(dd).padStart(2, '0'));
                           const pattern = new RegExp(
                             String(date.year).padStart(4, '0') +
                               '-' +

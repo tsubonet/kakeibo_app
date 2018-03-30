@@ -33,8 +33,8 @@ class Login extends React.Component<Props, State> {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ authFailure: nextProps.auth.fail })
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return { authFailure: nextProps.auth.fail }
   }
 
   handleSubmit() {

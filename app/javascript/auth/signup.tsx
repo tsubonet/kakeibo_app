@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { fetchRootProps } from '../actions/common'
 import { withRouter } from 'react-router'
 import { StoreState, Auth } from '../types/index'
+import axios from 'axios'
 
 interface Props {
   auth: Auth
@@ -47,9 +48,9 @@ class Signup extends React.Component<Props, State> {
     fb.append('email', email)
     fb.append('password', password)
     fb.append('password_confirmation', passwordConfirmation)
+
     fetch('/auth', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: fb,
     })
       .then(res => res.json())

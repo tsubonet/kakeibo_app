@@ -9,62 +9,55 @@ interface Props {
   date: Date
   records: Record[]
 }
-export default class PageMonth extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props)
-  }
 
-  prevCalendar(): string {
-    const { date } = this.props
-    if (date.month === 1) {
-      return `/month/${date.year - 1}/12`
-    } else {
-      return `/month/${date.year}/${date.month - 1}`
-    }
+const prevCalendar = date => {
+  if (date.month === 1) {
+    return `/month/${date.year - 1}/12`
+  } else {
+    return `/month/${date.year}/${date.month - 1}`
   }
+}
 
-  nextCalendar(): string {
-    const { date } = this.props
-    if (date.month === 12) {
-      return `/month/${date.year + 1}/1`
-    } else {
-      return `/month/${date.year}/${date.month + 1}`
-    }
+const nextCalendar = date => {
+  if (date.month === 12) {
+    return `/month/${date.year + 1}/1`
+  } else {
+    return `/month/${date.year}/${date.month + 1}`
   }
+}
 
-  render() {
-    const { date } = this.props
-    return (
-      <div>
-        <ControllNav>
-          <ul>
-            <li>
-              <Link href={this.prevCalendar()}>
-                <i className="fas fa-angle-left fa-2x" />
-              </Link>
-            </li>
-            <li>
-              <Link href={this.nextCalendar()}>
-                <i className="fas fa-angle-right fa-2x" />
-              </Link>
-            </li>
-            <li>
-              <Link href="/" data-type="btn">
-                今月
-              </Link>
-            </li>
-            <li>
-              <Link href={`/year/${date.year}`} data-type="btn">
-                {date.year}年一覧
-              </Link>
-            </li>
-          </ul>
-        </ControllNav>
-        <Calendar {...this.props} />
-        <Charts {...this.props} />
-      </div>
-    )
-  }
+const PageMonth = (props: Props) => {
+  const { date } = props
+  return (
+    <div>
+      <ControllNav>
+        <ul>
+          <li>
+            <Link href={prevCalendar(date)}>
+              <i className="fas fa-angle-left fa-2x" />
+            </Link>
+          </li>
+          <li>
+            <Link href={nextCalendar(date)}>
+              <i className="fas fa-angle-right fa-2x" />
+            </Link>
+          </li>
+          <li>
+            <Link href="/" data-type="btn">
+              今月
+            </Link>
+          </li>
+          <li>
+            <Link href={`/year/${date.year}`} data-type="btn">
+              {date.year}年一覧
+            </Link>
+          </li>
+        </ul>
+      </ControllNav>
+      <Calendar {...props} />
+      <Charts {...props} />
+    </div>
+  )
 }
 
 const ControllNav = styled.nav`
@@ -87,3 +80,4 @@ const ControllNav = styled.nav`
     }
   }
 `
+export default PageMonth

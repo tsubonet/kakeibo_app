@@ -7,9 +7,10 @@ import { StoreState, Auth } from '../types/index'
 
 interface Props {
   auth: Auth
-  history: object
+  history
   transitTo
   authenticate
+  location
 }
 interface State {
   email: string
@@ -48,6 +49,14 @@ class Login extends React.Component<Props, State> {
     return (
       <div>
         <h2>Login</h2>
+        {(() => {
+          if (
+            typeof this.props.location.state !== 'undefined' &&
+            typeof this.props.location.state.message !== 'undefined'
+          ) {
+            return <div>{this.props.location.state.message}</div>
+          }
+        })()}
         {(() => {
           if (authFailure) {
             return <div>正しい値を入力してください</div>

@@ -4,11 +4,10 @@ import { Redirect } from 'react-router-dom'
 import { fetchRootProps } from '../actions/common'
 import { withRouter } from 'react-router'
 import { StoreState, Auth } from '../types/index'
-import axios from 'axios'
 
 interface Props {
   auth: Auth
-  history: object
+  history
   transitTo
   authenticate
 }
@@ -42,13 +41,13 @@ class Signup extends React.Component<Props, State> {
   }
 
   handleSubmit() {
+    const { history } = this.props
     const { name, email, password, passwordConfirmation } = this.state
     const fb = new FormData()
     fb.append('name', name)
     fb.append('email', email)
     fb.append('password', password)
     fb.append('password_confirmation', passwordConfirmation)
-
     fetch('/auth', {
       method: 'POST',
       body: fb,
@@ -56,7 +55,8 @@ class Signup extends React.Component<Props, State> {
       .then(res => res.json())
       .then(json => {
         if (json.status === 'success') {
-          this.setState({ redirectToReferrer: true })
+          history.push('/login', { message: '登録完了しました、ログインしてください' })
+          //this.setState({ redirectToReferrer: true })
         } else {
           this.setState({ errorMessages: json.errors.full_messages })
         }

@@ -1,20 +1,18 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
+import { LinkContext } from '../context'
 
 export default class Link extends React.Component<any> {
-  static contextTypes = {
-    onLinkClick: PropTypes.func,
-  }
-
-  onClick(event) {
-    this.context.onLinkClick(event)
-  }
-
   render() {
     return (
-      <a onClick={this.onClick.bind(this)} {...this.props}>
-        {this.props.children}
-      </a>
+      <LinkContext.Consumer>
+        {({ actions }) => {
+          return (
+            <a onClick={e => actions.onLinkClick(e)} {...this.props}>
+              {this.props.children}
+            </a>
+          )
+        }}
+      </LinkContext.Consumer>
     )
   }
 }

@@ -1,5 +1,4 @@
 import * as React from 'react'
-import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import Link from '../components/link'
 import { media } from '../utils'
@@ -15,6 +14,8 @@ import GlobalNav from '../auth/global_nav'
 import Signup from '../auth/signup'
 import Login from '../auth/login'
 
+import { LinkContext } from '../context'
+
 interface Props {
   history: object
   auth: Auth
@@ -22,18 +23,8 @@ interface Props {
 }
 
 export default class Router extends React.Component<Props> {
-  static childContextTypes = {
-    onLinkClick: PropTypes.func,
-  }
-
   constructor(props: Props) {
     super(props)
-  }
-
-  getChildContext() {
-    return {
-      onLinkClick: this.onLinkClick.bind(this),
-    }
   }
 
   componentDidMount() {
@@ -65,18 +56,26 @@ export default class Router extends React.Component<Props> {
   render() {
     return (
       <Wrap>
-        <Logo>
-          <Link href="/">かんたんな家計簿</Link>
-        </Logo>
-        <GlobalNav />
-        <Switch>
-          <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
-          <PrivateRoute exact path="/" component={PageMonth} />
-          <PrivateRoute exact path="/month/:year/:month" component={PageMonth} />
-          <PrivateRoute exact path="/day/:year/:month/:day" component={PageDay} />
-          <PrivateRoute exact path="/year/:year/" component={PageYear} />
-        </Switch>
+        <LinkContext.Provider
+          value={{
+            actions: {
+              onLinkClick: e => this.onLinkClick(e),
+            },
+          }}
+        >
+          <Logo>
+            <Link href="/">かんたんな家計簿</Link>
+          </Logo>
+          <GlobalNav />
+          <Switch>
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+            <PrivateRoute exact path="/" component={PageMonth} />
+            <PrivateRoute exact path="/month/:year/:month" component={PageMonth} />
+            <PrivateRoute exact path="/day/:year/:month/:day" component={PageDay} />
+            <PrivateRoute exact path="/year/:year/" component={PageYear} />
+          </Switch>
+        </LinkContext.Provider>
       </Wrap>
     )
   }

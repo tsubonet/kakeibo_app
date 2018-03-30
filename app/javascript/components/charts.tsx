@@ -6,8 +6,7 @@ interface Props {
   records: Record[]
 }
 
-const Charts = (props: Props) => {
-  const { records } = props
+const Charts = ({ records }: Props) => {
   const data = records.reduce((result, current) => {
     const element = result.find(p => p.name === current.sort)
     if (element) {

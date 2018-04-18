@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { ResponsiveContainer, PieChart, Pie, Cell, Legend, Tooltip } from 'recharts'
 import { Record } from '../types/index'
+import styled from 'styled-components'
 
 interface Props {
   records: Record[]
@@ -21,22 +22,13 @@ const Charts = ({ records }: Props) => {
     }
     return result
   }, [])
-  const containerStyle = {
-    WebkitBoxSizing: 'border-box',
-    boxSizing: 'border-box',
-    padding: '8px',
-    width: '80%',
-    height: '330px',
-    maxHeight: '330px',
-    margin: '0 auto',
-  }
   const COLORS = ['#E2A27D', '#cf73c3', '#cccccc', '#000000', '#FFB6C1']
   return (
     <div>
       {(() => {
         if (records.length) {
           return (
-            <div style={containerStyle}>
+            <ChartsWrapper>
               <ResponsiveContainer>
                 <PieChart>
                   <Pie data={data} dataKey="value" startAngle={90} endAngle={-270}>
@@ -46,7 +38,7 @@ const Charts = ({ records }: Props) => {
                   <Legend />
                 </PieChart>
               </ResponsiveContainer>
-            </div>
+            </ChartsWrapper>
           )
         } else {
           return null
@@ -55,4 +47,14 @@ const Charts = ({ records }: Props) => {
     </div>
   )
 }
+
+const ChartsWrapper = styled.div`
+    box-sizing: border-box;
+    padding: 8px;
+    width: 80%;
+    height: 330px;
+    max-height: 330px;
+    margin: 0 auto;
+  }
+`
 export default Charts

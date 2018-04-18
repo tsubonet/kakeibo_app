@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'mini_racer', platforms: :ruby
-gem "react_on_rails", "10.1.3"
+gem "react_on_rails", "10.1.4"
 gem "webpacker", "~> 3.0"
 gem "foreman"
 # トークンベースの認証を行うためのgem

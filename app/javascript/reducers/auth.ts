@@ -22,6 +22,10 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, {
         fail: true,
       })
+    case 'AUTH_INTERRUPT':
+      return Object.assign({}, state, {
+        fail: false,
+      })
     case 'AUTH_SIGNOUT':
       return Object.assign({}, initialState)
     default:

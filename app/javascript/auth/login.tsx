@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import { authenticate } from '../actions/auth'
+import { authenticate, authInterrupt } from '../actions/auth'
 import { fetchRootProps } from '../actions/common'
 import { withRouter } from 'react-router'
 import { StoreState, Auth } from '../types/index'
@@ -10,6 +10,7 @@ interface Props {
   history
   transitTo
   authenticate
+  authInterrupt
   location
 }
 interface State {
@@ -31,6 +32,13 @@ class Login extends React.Component<Props, State> {
     const { auth, transitTo, history } = this.props
     if (auth.isAuthenticated) {
       transitTo('/', auth, history)
+    }
+  }
+
+  componentWillUnmount() {
+    const { auth, authInterrupt } = this.props
+    if (auth.fail) {
+      authInterrupt()
     }
   }
 
@@ -88,6 +96,9 @@ const mapDispatchToProps = dispatch => {
     },
     authenticate: (email: string, password: string, history: object) => {
       dispatch(authenticate(email, password, history))
+    },
+    authInterrupt: () => {
+      dispatch(authInterrupt())
     },
   }
 }

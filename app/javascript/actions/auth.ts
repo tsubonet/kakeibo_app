@@ -20,3 +20,7 @@ export function signout(auth: Auth): object {
     },
   }
 }
+
+export function authInterrupt() {
+  return { type: 'AUTH_INTERRUPT' }
+}

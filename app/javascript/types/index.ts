@@ -1,4 +1,5 @@
 export interface Auth {
+  fail: boolean
   accessToken: string
   client: string
   expiry: string
